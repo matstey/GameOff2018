@@ -1,6 +1,6 @@
 extends KinematicBody2D
 
-const MAX_SPEED = 100;
+export (int) var MaxSpeed = 100;
 
 var chase = false;
 var target;
@@ -20,7 +20,7 @@ func update_chase():
 
 	var direction = target.position - position
 	
-	move_and_slide(direction.normalized() * MAX_SPEED)
+	move_and_slide(direction.normalized() * MaxSpeed)
 
 	pass
 
