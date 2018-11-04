@@ -1,0 +1,111 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://assets/scripts/Player.gd" type="Script" id=1]
+[ext_resource path="res://assets/art/Player/atlas/playerAnim.tres" type="Texture" id=2]
+
+[sub_resource type="RectangleShape2D" id=1]
+
+custom_solver_bias = 0.0
+extents = Vector2( 3.52409, 6.78017 )
+
+[sub_resource type="Animation" id=2]
+
+resource_name = "Run"
+length = 0.9
+loop = true
+step = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 30, 31, 32, 33, 34, 35, 36, 37, 38, 39 ]
+}
+
+[node name="Player" type="KinematicBody2D"]
+
+input_pickable = false
+collision_layer = 1
+collision_mask = 1
+collision/safe_margin = 0.08
+script = ExtResource( 1 )
+_sections_unfolded = [ "Collision", "Pickable", "Transform", "collision" ]
+__meta__ = {
+"_edit_group_": true
+}
+speed = 400
+deadzone = Vector2( 0.2, 0.2 )
+
+[node name="Body" type="Sprite" parent="." index="0"]
+
+z_index = 2
+texture = ExtResource( 2 )
+vframes = 12
+hframes = 8
+frame = 40
+_sections_unfolded = [ "Animation", "Offset", "Transform", "Z Index" ]
+
+[node name="Legs" type="Sprite" parent="." index="1"]
+
+z_index = 1
+texture = ExtResource( 2 )
+vframes = 12
+hframes = 8
+frame = 30
+_sections_unfolded = [ "Animation", "Offset", "Transform", "Z Index" ]
+
+[node name="Head" type="Sprite" parent="." index="2"]
+
+z_index = 3
+texture = ExtResource( 2 )
+vframes = 12
+hframes = 8
+frame = 4
+_sections_unfolded = [ "Animation", "Offset", "Z Index" ]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." index="3"]
+
+visible = false
+position = Vector2( 0.174828, 1.22716 )
+scale = Vector2( 1, 0.892676 )
+shape = SubResource( 1 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="4"]
+
+root_node = NodePath("../Legs")
+autoplay = ""
+playback_process_mode = 1
+playback_default_blend_time = 0.0
+playback_speed = 1.0
+anims/Run = SubResource( 2 )
+blend_times = [  ]
+
+[node name="AnimationTreePlayer" type="AnimationTreePlayer" parent="." index="5"]
+
+playback_process_mode = 1
+master_player = NodePath("../AnimationPlayer")
+base_path = NodePath("..")
+active = true
+data = {
+"active": true,
+"connections": [ "anim", "out", 0 ],
+"master": NodePath("../AnimationPlayer"),
+"nodes": [ {
+"filter": [  ],
+"from": "Run",
+"id": "anim",
+"position": Vector2( 192, 88 ),
+"type": "animation"
+}, {
+"id": "out",
+"position": Vector2( 678, 97 ),
+"type": "output"
+} ]
+}
+
+
