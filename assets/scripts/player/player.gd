@@ -24,5 +24,6 @@ func _physics_process(delta):
 		movement.x += 1.0
 	
 	move_and_slide(movement.normalized() * MAX_SPEED)
+
 	
 	pass

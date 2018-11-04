@@ -1,0 +1,78 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://assets/prefabs/props/purplecircle.tscn" type="PackedScene" id=1]
+[ext_resource path="res://assets/prefabs/props/greencircle.tscn" type="PackedScene" id=2]
+
+[node name="level0" type="Node2D"]
+
+[node name="props" type="Node2D" parent="." index="0"]
+
+[node name="purplecircle" type="KinematicBody2D" parent="props" index="0" instance=ExtResource( 1 )]
+
+position = Vector2( 120, 210 )
+input_pickable = false
+collision_layer = 1
+collision_mask = 1
+collision/safe_margin = 0.08
+
+[node name="purplecircle2" type="KinematicBody2D" parent="props" index="1" instance=ExtResource( 1 )]
+
+position = Vector2( 610, 90 )
+input_pickable = false
+collision_layer = 1
+collision_mask = 1
+collision/safe_margin = 0.08
+
+[node name="purplecircle3" type="KinematicBody2D" parent="props" index="2" instance=ExtResource( 1 )]
+
+position = Vector2( 600, 340 )
+input_pickable = false
+collision_layer = 1
+collision_mask = 1
+collision/safe_margin = 0.08
+
+[node name="greencircle" type="RigidBody2D" parent="props" index="3" instance=ExtResource( 2 )]
+
+position = Vector2( 210, 410 )
+input_pickable = false
+collision_layer = 1
+collision_mask = 1
+mode = 0
+mass = 1.0
+friction = 1.0
+bounce = 0.0
+gravity_scale = 0.0
+custom_integrator = false
+continuous_cd = 0
+contacts_reported = 0
+contact_monitor = false
+sleeping = false
+can_sleep = true
+linear_velocity = Vector2( 0, 0 )
+linear_damp = -1.0
+angular_velocity = 0.0
+angular_damp = -1.0
+
+[node name="greencircle2" type="RigidBody2D" parent="props" index="4" instance=ExtResource( 2 )]
+
+position = Vector2( 710, 440 )
+input_pickable = false
+collision_layer = 1
+collision_mask = 1
+mode = 0
+mass = 1.0
+friction = 1.0
+bounce = 0.0
+gravity_scale = 0.0
+custom_integrator = false
+continuous_cd = 0
+contacts_reported = 0
+contact_monitor = false
+sleeping = false
+can_sleep = true
+linear_velocity = Vector2( 0, 0 )
+linear_damp = -1.0
+angular_velocity = 0.0
+angular_damp = -1.0
+
+
