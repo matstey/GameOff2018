@@ -15,6 +15,8 @@ public class PlayerController : MonoBehaviour {
 
     [SerializeField]
     Animator m_legsAnimController;
+
+    public bool Attacking { get; set; } = false;
     
     Rigidbody2D m_rigidbody;
     SpriteRenderer[] m_renderers;
@@ -41,20 +43,17 @@ public class PlayerController : MonoBehaviour {
 
         float animSpeed = move.magnitude * m_maxWalkAnimSpeed;
 
-        if (animSpeed > 0.1)
-        {
-            m_legsAnimController.speed = animSpeed;
-            m_bodyAnimController.speed = animSpeed;
-
-        }
-        else
+        m_legsAnimController.speed = animSpeed;
+        m_bodyAnimController.speed = Attacking ? 1.0f : animSpeed;
+        
+        if (animSpeed <= 0.01)
         {
             m_legsAnimController.Play("LegsRun", -1, 0.0f);
         }
 
         SetDirection(moveX < 0);
 
-        if (attack)
+        if (attack && !Attacking)
         {
             m_bodyAnimController.SetTrigger("Attack");
         }

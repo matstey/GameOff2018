@@ -1,0 +1,499 @@
+fileFormatVersion: 2
+guid: 353c059409967f24a9a347f8d1971409
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: 37033d6e-0c40-44a3-857b-0192add29fc7_0
+    21300002: 37033d6e-0c40-44a3-857b-0192add29fc7_1
+    21300004: 37033d6e-0c40-44a3-857b-0192add29fc7_2
+    21300006: 37033d6e-0c40-44a3-857b-0192add29fc7_3
+    21300008: 37033d6e-0c40-44a3-857b-0192add29fc7_4
+    21300010: 37033d6e-0c40-44a3-857b-0192add29fc7_5
+    21300012: 37033d6e-0c40-44a3-857b-0192add29fc7_6
+    21300014: 37033d6e-0c40-44a3-857b-0192add29fc7_7
+    21300016: 37033d6e-0c40-44a3-857b-0192add29fc7_8
+    21300018: 37033d6e-0c40-44a3-857b-0192add29fc7_9
+    21300020: 37033d6e-0c40-44a3-857b-0192add29fc7_10
+    21300022: 37033d6e-0c40-44a3-857b-0192add29fc7_11
+    21300024: 37033d6e-0c40-44a3-857b-0192add29fc7_12
+    21300026: 37033d6e-0c40-44a3-857b-0192add29fc7_13
+    21300028: 37033d6e-0c40-44a3-857b-0192add29fc7_14
+    21300030: 37033d6e-0c40-44a3-857b-0192add29fc7_15
+    21300032: 37033d6e-0c40-44a3-857b-0192add29fc7_16
+    21300034: 37033d6e-0c40-44a3-857b-0192add29fc7_17
+    21300036: 37033d6e-0c40-44a3-857b-0192add29fc7_18
+    21300038: 37033d6e-0c40-44a3-857b-0192add29fc7_19
+    21300040: 37033d6e-0c40-44a3-857b-0192add29fc7_20
+    21300042: 37033d6e-0c40-44a3-857b-0192add29fc7_21
+    21300044: 37033d6e-0c40-44a3-857b-0192add29fc7_22
+    21300046: 37033d6e-0c40-44a3-857b-0192add29fc7_23
+    21300048: 37033d6e-0c40-44a3-857b-0192add29fc7_24
+    21300050: 37033d6e-0c40-44a3-857b-0192add29fc7_25
+    21300052: 37033d6e-0c40-44a3-857b-0192add29fc7_26
+    21300054: 37033d6e-0c40-44a3-857b-0192add29fc7_27
+    21300056: 37033d6e-0c40-44a3-857b-0192add29fc7_28
+    21300058: 37033d6e-0c40-44a3-857b-0192add29fc7_29
+    21300060: 37033d6e-0c40-44a3-857b-0192add29fc7_30
+    21300062: 37033d6e-0c40-44a3-857b-0192add29fc7_31
+    21300064: 37033d6e-0c40-44a3-857b-0192add29fc7_32
+    21300066: 37033d6e-0c40-44a3-857b-0192add29fc7_33
+    21300068: 37033d6e-0c40-44a3-857b-0192add29fc7_34
+    21300070: 37033d6e-0c40-44a3-857b-0192add29fc7_35
+    21300072: 37033d6e-0c40-44a3-857b-0192add29fc7_36
+    21300074: 37033d6e-0c40-44a3-857b-0192add29fc7_37
+    21300076: 37033d6e-0c40-44a3-857b-0192add29fc7_38
+    21300078: 37033d6e-0c40-44a3-857b-0192add29fc7_39
+    21300080: 37033d6e-0c40-44a3-857b-0192add29fc7_40
+    21300082: 37033d6e-0c40-44a3-857b-0192add29fc7_41
+    21300084: 37033d6e-0c40-44a3-857b-0192add29fc7_42
+    21300086: 37033d6e-0c40-44a3-857b-0192add29fc7_43
+    21300088: 37033d6e-0c40-44a3-857b-0192add29fc7_44
+    21300090: 37033d6e-0c40-44a3-857b-0192add29fc7_45
+    21300092: 37033d6e-0c40-44a3-857b-0192add29fc7_46
+    21300094: 37033d6e-0c40-44a3-857b-0192add29fc7_47
+    21300096: 37033d6e-0c40-44a3-857b-0192add29fc7_48
+    21300098: 37033d6e-0c40-44a3-857b-0192add29fc7_49
+    21300100: 37033d6e-0c40-44a3-857b-0192add29fc7_50
+    21300102: 37033d6e-0c40-44a3-857b-0192add29fc7_51
+    21300104: 37033d6e-0c40-44a3-857b-0192add29fc7_52
+    21300106: 37033d6e-0c40-44a3-857b-0192add29fc7_53
+    21300108: 37033d6e-0c40-44a3-857b-0192add29fc7_54
+    21300110: 37033d6e-0c40-44a3-857b-0192add29fc7_55
+    21300112: 37033d6e-0c40-44a3-857b-0192add29fc7_56
+    21300114: 37033d6e-0c40-44a3-857b-0192add29fc7_57
+    21300116: 37033d6e-0c40-44a3-857b-0192add29fc7_58
+    21300118: 37033d6e-0c40-44a3-857b-0192add29fc7_59
+    21300120: 37033d6e-0c40-44a3-857b-0192add29fc7_60
+    21300122: 37033d6e-0c40-44a3-857b-0192add29fc7_61
+    21300124: 37033d6e-0c40-44a3-857b-0192add29fc7_62
+    21300126: 37033d6e-0c40-44a3-857b-0192add29fc7_63
+    21300128: floortiles_0
+    21300130: floortiles_1
+    21300132: floortiles_2
+    21300134: floortiles_3
+    21300136: floortiles_4
+    21300138: floortiles_5
+    21300140: floortiles_6
+    21300142: floortiles_7
+    21300144: floortiles_8
+    21300146: floortiles_9
+    21300148: floortiles_10
+    21300150: floortiles_11
+    21300152: floortiles_12
+    21300154: floortiles_13
+    21300156: floortiles_14
+    21300158: floortiles_15
+  externalObjects: {}
+  serializedVersion: 7
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: -1
+    mipBias: -100
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 32
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  platformSettings:
+  - serializedVersion: 2
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+  - serializedVersion: 2
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: floortiles_0
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 96
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b392a74a15013114b976bc24fd21af47
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: floortiles_1
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 96
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1efd1dc228c02954281fafee6aa25e54
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: floortiles_2
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 96
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4e2e427557900844ba75b5d93af207f0
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: floortiles_3
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 96
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3f621e97c87b61544b94ff4e3512493b
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: floortiles_4
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 64
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 812631c354e66034ab60025869a6d20e
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: floortiles_5
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 64
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7274ffd962a370140b3ddb41d6affce2
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: floortiles_6
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 64
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 00e9048f332872e4693083d3338a7400
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: floortiles_7
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 64
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4b727a6765529354eaf61139647bb60e
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: floortiles_8
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 64
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a1c19dd2ff303724b94a0b484ee37189
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: floortiles_9
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 32
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 918b82369b4b5fa45a0e403a09a049aa
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: floortiles_10
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 32
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6963f845db231b34889bba592c1220c0
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: floortiles_11
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 32
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f3019839e4085604ca5e45f94a659641
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: floortiles_12
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 32
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 44ba12c077de97044b8c62f7a9ad7d2a
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: floortiles_13
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 32
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9ce9987c0f7a01841abeb74a408b82d1
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: floortiles_14
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7cfb08612a6d9dc49b50845bc1eecba0
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: floortiles_15
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3882ad8a49f60c641a2a1ab0d57a713e
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 60d84d13ab59bd34a82c6aae441de5de
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
