@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEventAggregator;
 
 public class PlayerController : MonoBehaviour, IHasAttack, IAttackable
 {
@@ -87,5 +88,6 @@ public class PlayerController : MonoBehaviour, IHasAttack, IAttackable
     public void OnHit(float damage)
     {
         //Debug.Log($"{name} hit with {damage} damage");
+        EventAggregator.SendMessage(new PlayerDamagedEvent() { Damage = damage });
     }
 }
