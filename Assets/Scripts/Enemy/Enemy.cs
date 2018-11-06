@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour, IHasAttack, IAttackable
+public class Enemy : MonoBehaviour, IHasAttack, IAttackable
 {
     [SerializeField]
     float m_maxSpeed = 10.0f;
@@ -17,63 +17,65 @@ public class PlayerController : MonoBehaviour, IHasAttack, IAttackable
     Animator m_legsAnimController;
 
     [SerializeField]
-    LayerMask m_attackMask;
+    string m_targetTag = "Player";
 
     [SerializeField]
-    float m_attackRange = 1;
+    float m_attackDistance = 2;
+
+    [SerializeField]
+    float m_stopDistance = 1.8f;
 
     public bool Attacking { get; set; } = false;
-    
+
     Rigidbody2D m_rigidbody;
     SpriteRenderer[] m_renderers;
 
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start()
+    {
         m_rigidbody = GetComponent<Rigidbody2D>();
         m_renderers = GetComponentsInChildren<SpriteRenderer>();
     }
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
 
-    private void FixedUpdate()
+    private void OnTriggerStay2D(Collider2D other)
     {
-        float moveX = Input.GetAxis("Horizontal");
-        float moveY = Input.GetAxis("Vertical");
-        bool attack = Input.GetButtonDown("Fire1");
+        if(!other.gameObject.CompareTag(m_targetTag))
+        {
+            return;
+        }
 
-        Vector2 move = new Vector2(moveX, moveY);
-        m_rigidbody.velocity = move * m_maxSpeed;
+        Vector2 playerToEnemy = other.transform.position - transform.position;
+        float distance = playerToEnemy.magnitude;
+        Vector2 direction = playerToEnemy.normalized;
 
-        float animSpeed = move.magnitude * m_maxWalkAnimSpeed;
+        bool withinAttackDistance = distance < m_attackDistance;
+        bool stop = distance <= m_stopDistance;
+
+        m_rigidbody.velocity = stop ? Vector2.zero : direction * m_maxSpeed;
+
+        float animSpeed = m_rigidbody.velocity.magnitude * m_maxWalkAnimSpeed;
 
         m_legsAnimController.speed = animSpeed;
         m_bodyAnimController.speed = Attacking ? 1.0f : animSpeed;
-        
+
         if (animSpeed <= 0.01)
         {
             m_legsAnimController.Play("LegsRun", -1, 0.0f);
         }
 
-        SetDirection(moveX < 0);
+        SetDirection(direction.x < 0);
 
-        if (attack && !Attacking)
+        if (withinAttackDistance && !Attacking)
         {
-            Attack(moveX < 0);
+            Attack(other.gameObject);
         }
     }
 
-    void Attack(bool left)
+    void Attack(GameObject target)
     {
         m_bodyAnimController.SetTrigger("Attack");
 
-        Collider2D hit = Physics2D.OverlapCircle(transform.position, m_attackRange, m_attackMask);
-        if (hit != null)
-        {
-            hit.transform.SendMessage("OnHit", (hit.transform.position - transform.position).magnitude);
-        }
+        target.SendMessage("OnHit", 10);
     }
 
     void SetDirection(bool left)
@@ -86,6 +88,6 @@ public class PlayerController : MonoBehaviour, IHasAttack, IAttackable
 
     public void OnHit(float damage)
     {
-        //Debug.Log($"{name} hit with {damage} damage");
+        Debug.Log($"{name} hit with {damage}");
     }
 }
