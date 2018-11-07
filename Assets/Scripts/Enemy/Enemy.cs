@@ -4,8 +4,24 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour, IHasAttack, IAttackable
 {
+    enum AIState
+    {
+        Roaming,
+        Seeking,
+        Attacking,
+    }
+
+    class AIResult
+    {
+        public Vector2 Direction { get; set; }
+        public Vector2 Velocity { get; set; }
+    }
+
     [SerializeField]
     float m_maxSpeed = 10.0f;
+
+    [SerializeField]
+    float m_roamingSpeed = 2.0f;
 
     [SerializeField]
     float m_maxWalkAnimSpeed = 0.5f;
@@ -32,6 +48,9 @@ public class Enemy : MonoBehaviour, IHasAttack, IAttackable
     Rigidbody2D m_rigidbody;
     SpriteRenderer[] m_renderers;
     GameObject m_target;
+    AIState m_aiState = AIState.Roaming;
+    Vector2 m_currentWaypoint;
+    bool m_wayPointValid = false;
 
     // Use this for initialization
     void Start()
@@ -44,19 +63,147 @@ public class Enemy : MonoBehaviour, IHasAttack, IAttackable
 
     void FixedUpdate()
     {
+        AIResult result = null;
+        switch(m_aiState)
+        {
+            case AIState.Roaming:
+                result = UpdateRoaming();
+                break;
+            case AIState.Seeking:
+                result = UpdateSeeking();
+                break;
+            case AIState.Attacking:
+                result = UpdateAttacking();
+                break;
+        }
+
+        UpdateMovement(result.Direction, result.Velocity);        
+    }
+
+    Vector2 GenerateWaypoint()
+    {
+        float radians = Random.Range(-Mathf.PI, Mathf.PI);
+
+        Vector2 direction = new Vector2(Mathf.Cos(radians), Mathf.Sin(radians)).normalized;
+        Debug.Log(direction);
+        float distance = Random.Range(02.0f, 10.0f);
+
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, direction, distance, 1 << LayerMask.NameToLayer("Map"));
+
+        if(hit.collider == null)
+        {
+            return (Vector2)transform.position + (direction * distance);
+        }
+        else
+        {
+            return hit.point + (direction * -1.0f);
+        }
+    }
+
+    bool IsAtPosition(Vector2 position)
+    {
+        return Vector2.Distance(transform.position, position) < 1.0f;
+    }
+
+    AIResult UpdateRoaming()
+    {
+        if(IsAtPosition(m_currentWaypoint) || !m_wayPointValid)
+        {
+            m_currentWaypoint = GenerateWaypoint();
+            m_wayPointValid = true;
+        }
+
+        Vector2 wayPointToEnemy = m_currentWaypoint - (Vector2)transform.position;
+        float distance = wayPointToEnemy.magnitude;
+        Vector2 direction = wayPointToEnemy.normalized;
+
+        Vector2 velocity = direction * m_roamingSpeed;
+
+        if (m_target != null)
+        {
+            m_aiState = AIState.Seeking;
+            m_wayPointValid = false;
+        }
+
+        return new AIResult()
+        {
+            Velocity = velocity,
+            Direction = direction
+        };
+    }
+
+    AIResult UpdateSeeking()
+    {
         if (m_target == null)
         {
-            return;
+            m_aiState = AIState.Roaming;
+            return new AIResult()
+            {
+                Velocity = Vector2.zero,
+                Direction = Vector2.right
+            };
         }
 
         Vector2 playerToEnemy = m_target.transform.position - transform.position;
         float distance = playerToEnemy.magnitude;
         Vector2 direction = playerToEnemy.normalized;
 
-        bool withinAttackDistance = distance < m_attackDistance;
-        bool stop = distance <= m_stopDistance;
+        Vector2 velocity = direction * m_maxSpeed;
 
-        m_rigidbody.velocity = stop ? Vector2.zero : direction * m_maxSpeed;
+        bool withinAttackDistance = distance < m_attackDistance;
+
+        if (withinAttackDistance)
+        {
+            m_aiState = AIState.Attacking;
+        }
+
+        return new AIResult()
+        {
+            Velocity = velocity,
+            Direction = playerToEnemy.normalized
+        };
+    }
+
+    AIResult UpdateAttacking()
+    {
+        if (m_target == null)
+        {
+            m_aiState = AIState.Roaming;
+            return new AIResult()
+            {
+                Velocity = Vector2.zero,
+                Direction = Vector2.right
+            };
+        }
+
+        Vector2 playerToEnemy = m_target.transform.position - transform.position;
+        float distance = playerToEnemy.magnitude;
+        Vector2 direction = playerToEnemy.normalized;
+
+        bool stop = distance <= m_stopDistance;
+        Vector2 velocity = stop ? Vector2.zero : direction * m_maxSpeed;
+
+        bool withinAttackDistance = distance < m_attackDistance;
+
+        if (withinAttackDistance && !Attacking)
+        {
+            Attack(m_target);
+        }
+        else if(!withinAttackDistance)
+        {
+            m_aiState = AIState.Seeking;
+        }
+
+        return new AIResult()
+        {
+            Velocity = velocity,
+            Direction = direction
+        };
+    }
+
+    void UpdateMovement(Vector2 direction, Vector2 velocity)
+    {
+        m_rigidbody.velocity = velocity;
 
         float animSpeed = m_rigidbody.velocity.magnitude * m_maxWalkAnimSpeed;
 
@@ -69,11 +216,6 @@ public class Enemy : MonoBehaviour, IHasAttack, IAttackable
         }
 
         SetDirection(direction.x < 0);
-
-        if (withinAttackDistance && !Attacking)
-        {
-            Attack(m_target);
-        }
     }
 
     void OnEnable()
@@ -84,6 +226,16 @@ public class Enemy : MonoBehaviour, IHasAttack, IAttackable
     void OnDisable()
     {
         Stop();
+    }
+
+    void OnCollisionEnter2D(Collider2D other)
+    {
+        m_wayPointValid = false;
+    }
+
+    void OnCollisionStay2D(Collider2D other)
+    {
+        m_wayPointValid = false;
     }
 
     void OnTriggerEnter2D(Collider2D other)
@@ -133,6 +285,16 @@ public class Enemy : MonoBehaviour, IHasAttack, IAttackable
 
     public void OnHit(float damage)
     {
+        // TODO: Add health
         Died(this);
+    }
+
+    void OnDrawGizmos()
+    {
+        if (m_wayPointValid)
+        {
+            Gizmos.color = Color.blue;
+            Gizmos.DrawSphere(m_currentWaypoint, 0.1f);
+        }
     }
 }
