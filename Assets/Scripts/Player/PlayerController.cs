@@ -46,6 +46,11 @@ public class PlayerController : MonoBehaviour, IHasAttack, IAttackable
         bool attack = Input.GetButtonDown("Fire1");
 
         Vector2 move = new Vector2(moveX, moveY);
+        if (move.magnitude > 1.0f)
+        {
+            move.Normalize();
+        }
+
         m_rigidbody.velocity = move * m_maxSpeed;
 
         float animSpeed = move.magnitude * m_maxWalkAnimSpeed;
