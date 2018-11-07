@@ -25,6 +25,11 @@ public class LevelManager : MonoBehaviour, IListener<LoadLevelEvent>
 
     public void LoadLevel(int index)
     {
+        if(m_currentMap)
+        {
+            Destroy(m_currentMap.gameObject);
+        }
+
         LevelData oldLevel = m_currentLevel;
         m_currentLevel = m_levels[index];
 
@@ -33,7 +38,8 @@ public class LevelManager : MonoBehaviour, IListener<LoadLevelEvent>
         EventAggregator.SendMessage(new LevelChangedEvent()
         {
             NewData = m_currentLevel,
-            OldData = oldLevel
+            OldData = oldLevel,
+            Map = m_currentMap,
         });
     }
 }

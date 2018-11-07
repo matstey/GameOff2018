@@ -29,22 +29,25 @@ public class Enemy : MonoBehaviour, IHasAttack, IAttackable
 
     Rigidbody2D m_rigidbody;
     SpriteRenderer[] m_renderers;
+    GameObject m_target;
 
     // Use this for initialization
     void Start()
     {
         m_rigidbody = GetComponent<Rigidbody2D>();
         m_renderers = GetComponentsInChildren<SpriteRenderer>();
+
+        m_legsAnimController.speed = 0.0f;
     }
 
-    private void OnTriggerStay2D(Collider2D other)
+    void FixedUpdate()
     {
-        if(!other.gameObject.CompareTag(m_targetTag))
+        if (m_target == null)
         {
             return;
         }
 
-        Vector2 playerToEnemy = other.transform.position - transform.position;
+        Vector2 playerToEnemy = m_target.transform.position - transform.position;
         float distance = playerToEnemy.magnitude;
         Vector2 direction = playerToEnemy.normalized;
 
@@ -67,8 +70,48 @@ public class Enemy : MonoBehaviour, IHasAttack, IAttackable
 
         if (withinAttackDistance && !Attacking)
         {
-            Attack(other.gameObject);
+            Attack(m_target);
         }
+    }
+
+    void OnEnable()
+    {
+        
+    }
+
+    void OnDisable()
+    {
+        Stop();
+    }
+
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        // If we have a target just focus on that
+        if (m_target != null) return;
+
+        if (!other.gameObject.CompareTag(m_targetTag))
+        {
+            return;
+        }
+
+        m_target = other.gameObject;
+    }
+
+    void OnTriggerExit2D(Collider2D other)
+    {
+        // Only clear the target if we have left our current target
+        if (m_target == other.gameObject)
+        {
+            m_target = null;
+            Stop();
+        }
+    }
+
+    void Stop()
+    {
+        m_rigidbody.velocity = Vector2.zero;
+        m_legsAnimController.Play("LegsRun", -1, 0.0f);
+        m_legsAnimController.speed = 0.0f;
     }
 
     void Attack(GameObject target)

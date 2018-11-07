@@ -4,5 +4,5 @@ using UnityEngine;
 
 public class LevelChangedEvent : ChangedEvent<LevelData>
 {
-
+    public LevelMap Map { get; set; }
 }

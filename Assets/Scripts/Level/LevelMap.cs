@@ -8,4 +8,9 @@ public class LevelMap : MonoBehaviour
     Transform m_playerStartPosition;
 
     public Vector2 PlayerStartPosition { get { return m_playerStartPosition.position; } }
+
+    [SerializeField]
+    SpawnPoint[] m_spawnPoints;
+
+    public SpawnPoint[] SpawnPoints { get { return m_spawnPoints; } }
 }
