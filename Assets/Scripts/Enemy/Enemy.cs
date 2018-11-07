@@ -27,6 +27,8 @@ public class Enemy : MonoBehaviour, IHasAttack, IAttackable
 
     public bool Attacking { get; set; } = false;
 
+    public event System.Action<Enemy> Died;
+
     Rigidbody2D m_rigidbody;
     SpriteRenderer[] m_renderers;
     GameObject m_target;
@@ -131,6 +133,6 @@ public class Enemy : MonoBehaviour, IHasAttack, IAttackable
 
     public void OnHit(float damage)
     {
-        Debug.Log($"{name} hit with {damage}");
+        Died(this);
     }
 }

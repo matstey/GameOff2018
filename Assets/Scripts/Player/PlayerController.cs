@@ -28,8 +28,13 @@ public class PlayerController : MonoBehaviour, IHasAttack, IAttackable
     Rigidbody2D m_rigidbody;
     SpriteRenderer[] m_renderers;
 
-	// Use this for initialization
-	void Start () {
+    float m_health = 0.0f;
+    float m_startHealth = 1.0f;
+
+    public bool IsAlive { get { return m_health > 0.0f; } }
+
+    // Use this for initialization
+    void Start () {
         m_rigidbody = GetComponent<Rigidbody2D>();
         m_renderers = GetComponentsInChildren<SpriteRenderer>();
     }
@@ -92,7 +97,20 @@ public class PlayerController : MonoBehaviour, IHasAttack, IAttackable
 
     public void OnHit(float damage)
     {
-        //Debug.Log($"{name} hit with {damage} damage");
-        EventAggregator.SendMessage(new PlayerDamagedEvent() { Damage = damage });
+        m_health -= damage;
+
+        EventAggregator.SendMessage(new PlayerHealthChangedEvent()
+        {
+            NewData = m_health,
+            OldData = m_health + damage,
+            Normalised = m_health / m_startHealth
+        });
+    }
+
+    public void SetStartHealth(float health)
+    {
+        m_startHealth = m_health = health;
+
+        EventAggregator.SendMessage(new PlayerHealthChangedEvent() { NewData = m_health, Normalised = 1.0f });
     }
 }

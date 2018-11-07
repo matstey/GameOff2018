@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEventAggregator;
 
-public class GameManager : MonoBehaviour, IListener<GameStateChangedEvent>, IListener<PlayerDamagedEvent>, IListener<LevelChangedEvent>
+public class GameManager : MonoBehaviour, IListener<GameStateChangedEvent>, IListener<PlayerHealthChangedEvent>, IListener<LevelChangedEvent>
 {
     [SerializeField]
     PlayerController m_playerPrefab;
@@ -13,12 +13,11 @@ public class GameManager : MonoBehaviour, IListener<GameStateChangedEvent>, ILis
 
     LevelData m_currentLevel;
     PlayerController m_player;
-    float m_playerHealth = 0.0f;
 
     void Awake()
     {
         EventAggregator.Register<GameStateChangedEvent>(this);
-        EventAggregator.Register<PlayerDamagedEvent>(this);
+        EventAggregator.Register<PlayerHealthChangedEvent>(this);
         EventAggregator.Register<LevelChangedEvent>(this);
     }
 
@@ -31,13 +30,12 @@ public class GameManager : MonoBehaviour, IListener<GameStateChangedEvent>, ILis
     {
         if(message.NewData == GameState.Playing && m_currentLevel != null)
         {
-            m_playerHealth = m_currentLevel.StartHealth;
-
             if(m_player)
             {
                 Destroy(m_player.gameObject);
             }
             m_player = Instantiate(m_playerPrefab, m_currentLevel.PlayerStartPosition, Quaternion.identity) as PlayerController;
+            m_player.SetStartHealth(m_currentLevel.StartHealth);
             m_camera.SetTarget(m_player.transform);
         }
         else if(message.NewData == GameState.MainMenu)
@@ -46,18 +44,11 @@ public class GameManager : MonoBehaviour, IListener<GameStateChangedEvent>, ILis
         }
     }
 
-    public void Handle(PlayerDamagedEvent message)
+    public void Handle(PlayerHealthChangedEvent message)
     {
-        m_playerHealth -= message.Damage;
-
-        if(m_playerHealth <= 0)
+        if(m_player && !m_player.IsAlive)
         {
-            if (m_player)
-            {
-                Destroy(m_player.gameObject);
-            }
-
-            Debug.Log("You died...");
+            Destroy(m_player.gameObject);
 
             EventAggregator.SendMessage(new RequestGameStateChange() { NewState = GameState.Dead });
         }

@@ -195,7 +195,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_enemyPrefabs:
   - {fileID: 114201922744546786, guid: 099ebbbfbc8fa0f4492627e6eba1ac38, type: 2}
-  m_spawnRate: 10
+  m_spawnRate: 4
 --- !u!114 &114639866402958696
 MonoBehaviour:
   m_ObjectHideFlags: 1
