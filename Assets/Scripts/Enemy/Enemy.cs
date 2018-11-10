@@ -228,12 +228,12 @@ public class Enemy : MonoBehaviour, IHasAttack, IAttackable
         Stop();
     }
 
-    void OnCollisionEnter2D(Collider2D other)
+    void OnCollisionEnter2D(Collision2D other)
     {
         m_wayPointValid = false;
     }
 
-    void OnCollisionStay2D(Collider2D other)
+    void OnCollisionStay2D(Collision2D other)
     {
         m_wayPointValid = false;
     }
