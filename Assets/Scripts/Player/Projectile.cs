@@ -50,6 +50,12 @@ public class Projectile : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
         m_hit = true;
+
+        IAttackable hitObj = collision.gameObject.GetComponent<IAttackable>();
+        if (hitObj != null)
+        {
+            collision.gameObject.SendMessage("OnHit", Damage);
+        }
     }
 
     public void OnExpireAnimationComplete(object sender, EventArgs e)

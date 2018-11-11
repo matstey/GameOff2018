@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class MainMenu : MonoBehaviour {
+public class Menu : MonoBehaviour {
 
     [System.Serializable]
     public class MenuSelection

@@ -85,7 +85,6 @@ public class Enemy : MonoBehaviour, IHasAttack, IAttackable
         float radians = Random.Range(-Mathf.PI, Mathf.PI);
 
         Vector2 direction = new Vector2(Mathf.Cos(radians), Mathf.Sin(radians)).normalized;
-        Debug.Log(direction);
         float distance = Random.Range(02.0f, 10.0f);
 
         RaycastHit2D hit = Physics2D.Raycast(transform.position, direction, distance, 1 << LayerMask.NameToLayer("Map"));

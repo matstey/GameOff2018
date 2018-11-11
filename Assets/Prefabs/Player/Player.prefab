@@ -166,7 +166,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.16}
+  m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -177,7 +177,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.82, y: 1.29}
+  m_Size: {x: 0.36, y: 0.92}
   m_EdgeRadius: 0
 --- !u!95 &95144114457364002
 Animator:
@@ -226,14 +226,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c342f876bda3fea4e857775f4d18a9b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_maxSpeed: 5
+  m_playerStats:
+    MaxSpeed: 5
+    RangedDelay: 0.8
+    RangedDamage: 1
+    RangedRange: 1
+    RangedSpeed: 5
+    MeleeRange: 1
+    MeleeDamage: 2
   m_maxWalkAnimSpeed: 1
-  m_rangedDelay: 0.8
-  m_rangedDamage: 1
-  m_rangedRange: 1
-  m_rangedSpeed: 8
-  m_meleeRange: 1
-  m_meleeDamage: 2
   m_bodyAnimController: {fileID: 95144114457364002}
   m_legsAnimController: {fileID: 95943625877259964}
   m_attackMask:

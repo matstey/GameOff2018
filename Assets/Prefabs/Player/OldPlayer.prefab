@@ -228,12 +228,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_maxSpeed: 8
   m_maxWalkAnimSpeed: 1
+  m_rangedDelay: 0.8
+  m_rangedDamage: 1
+  m_rangedRange: 1
+  m_rangedSpeed: 1
+  m_meleeRange: 1
+  m_meleeDamage: 2
   m_bodyAnimController: {fileID: 95769316945266998}
   m_legsAnimController: {fileID: 95774514063255922}
   m_attackMask:
     serializedVersion: 2
     m_Bits: 256
-  m_attackRange: 2
+  m_projectilePrefab: {fileID: 0}
 --- !u!212 &212015675415410366
 SpriteRenderer:
   m_ObjectHideFlags: 1

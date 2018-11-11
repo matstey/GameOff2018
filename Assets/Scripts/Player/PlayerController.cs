@@ -5,29 +5,24 @@ using UnityEventAggregator;
 
 public class PlayerController : MonoBehaviour, IHasAttack, IAttackable
 {
+    [System.Serializable]
+    public class PlayerStats
+    {
+        [SerializeField]
+        public float MaxSpeed = 10.0f;
+        public float RangedDelay = 0.8f;
+        public float RangedDamage = 1.0f;
+        public float RangedRange = 1.0f;
+        public float RangedSpeed = 1.0f;
+        public float MeleeRange = 1;
+        public float MeleeDamage = 2.0f;
+    }
+
     [SerializeField]
-    float m_maxSpeed = 10.0f;
+    PlayerStats m_playerStats = new PlayerStats();
 
     [SerializeField]
     float m_maxWalkAnimSpeed = 0.5f;
-
-    [SerializeField]
-    float m_rangedDelay = 0.8f;
-
-    [SerializeField]
-    float m_rangedDamage = 1.0f;
-
-    [SerializeField]
-    float m_rangedRange = 1.0f;
-
-    [SerializeField]
-    float m_rangedSpeed = 1.0f;
-
-    [SerializeField]
-    float m_meleeRange = 1;
-
-    [SerializeField]
-    float m_meleeDamage = 2.0f;
 
     [SerializeField]
     Animator m_bodyAnimController;
@@ -76,7 +71,7 @@ public class PlayerController : MonoBehaviour, IHasAttack, IAttackable
             {
                 Attack();
             }
-            else if (ranged && currentTime > m_lastFireTime + m_rangedDelay)
+            else if (ranged && currentTime > m_lastFireTime + m_playerStats.RangedDelay)
             {
                 m_lastFireTime = currentTime;
 
@@ -109,7 +104,7 @@ public class PlayerController : MonoBehaviour, IHasAttack, IAttackable
             move.Normalize();
         }
 
-        m_rigidbody.velocity = move * m_maxSpeed;
+        m_rigidbody.velocity = move * m_playerStats.MaxSpeed;
 
         float animSpeed = move.magnitude * m_maxWalkAnimSpeed;
 
@@ -128,7 +123,7 @@ public class PlayerController : MonoBehaviour, IHasAttack, IAttackable
     {
         m_bodyAnimController.SetTrigger("Attack");
 
-        Collider2D hit = Physics2D.OverlapCircle(transform.position, m_meleeRange, m_attackMask);
+        Collider2D hit = Physics2D.OverlapCircle(transform.position, m_playerStats.MeleeRange, m_attackMask);
         if (hit != null)
         {
             hit.transform.SendMessage("OnHit", (hit.transform.position - transform.position).magnitude);
@@ -140,13 +135,12 @@ public class PlayerController : MonoBehaviour, IHasAttack, IAttackable
         Projectile proj = Instantiate(m_projectilePrefab, transform.position, Quaternion.identity) as Projectile;
         if (proj != null)
         {
-            proj.Range = m_rangedRange;
-            proj.Speed = m_rangedSpeed;
-            proj.Damage = m_rangedDamage;
+            proj.Range = m_playerStats.RangedRange;
+            proj.Speed = m_playerStats.RangedSpeed;
+            proj.Damage = m_playerStats.RangedDamage;
 
             proj.Fire(direction);
         }
-
     }
 
     void SetDirection(bool left)

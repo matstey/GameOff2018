@@ -243,6 +243,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_maxSpeed: 4
+  m_roamingSpeed: 2
   m_maxWalkAnimSpeed: 0.5
   m_bodyAnimController: {fileID: 95180004959849960}
   m_legsAnimController: {fileID: 95307717264917090}
