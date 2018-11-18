@@ -103,7 +103,10 @@ public class PlayerController : MonoBehaviour, IHasAttack, IAttackable
             m_legsAnimController.Play("LegsRun", -1, 0.0f);
         }
 
-        SetDirection(moveX < 0);
+        if(moveX != 0)
+        {
+            SetDirection(moveX < 0);
+        }
     }
 
     void Attack()
@@ -142,6 +145,25 @@ public class PlayerController : MonoBehaviour, IHasAttack, IAttackable
     {
         //Do we have varying damage on the player? I like the idea of 1 "hit" being one health but this may need to be revisited
         UpdateHealth(0, -1);
+    }
+
+    public void AddModifier(PlayerModifier modifier)
+    {
+        if (modifier != null && modifier.StatModifiers != null)
+        {
+            PlayerStats statModifier = modifier.StatModifiers;
+
+            //Health is treat differently, do we need a more generic way of doing this? Events for each?
+            UpdateHealth(statModifier.MaxHealth, 0);
+
+            m_playerStats.MaxSpeed += statModifier.MaxSpeed;
+            m_playerStats.RangedDelay += statModifier.RangedDelay;
+            m_playerStats.RangedDamage += statModifier.RangedDamage;
+            m_playerStats.RangedRange += statModifier.RangedRange;
+            m_playerStats.RangedSpeed += statModifier.RangedSpeed;
+            m_playerStats.MeleeRange += statModifier.MeleeRange;
+            m_playerStats.MeleeDamage += statModifier.MeleeDamage;
+        }
     }
 
     public void SetStartHealth(int health)

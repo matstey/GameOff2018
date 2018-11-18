@@ -35,7 +35,7 @@ public class HealthBar : MonoBehaviour, IListener<PlayerHealthChangedEvent>
                     int x = index % m_heartsPerRow;
                     int y = index / m_heartsPerRow;
 
-                    healthHeart.transform.parent = transform;
+                    healthHeart.transform.SetParent(transform);
                     healthHeart.transform.localPosition = new Vector3(x * 32.0f, y * -32.0f, 0);
                     healthHeart.transform.localScale = Vector3.one;
                 }

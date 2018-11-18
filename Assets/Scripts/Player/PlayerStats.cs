@@ -3,6 +3,7 @@
 [System.Serializable]
 public class PlayerStats
 {
+    public int MaxHealth;
     public float MaxSpeed;
     public float RangedDelay;
     public float RangedDamage;
