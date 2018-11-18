@@ -11,9 +11,9 @@ public class LevelData : ScriptableObject
     public LevelMap MapPrefab { get { return m_mapPrefab; } }
 
     [SerializeField]
-    float m_startHealth = 100;
+    int m_startHealth = 5;
 
-    public float StartHealth{ get { return m_startHealth; } }
+    public int  StartHealth{ get { return m_startHealth; } }
 
     public Vector2 PlayerStartPosition { get { return m_mapPrefab.PlayerStartPosition; } }
 }

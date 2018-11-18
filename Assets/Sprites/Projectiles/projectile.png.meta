@@ -1,13 +1,11 @@
 fileFormatVersion: 2
-guid: 5483758278c84524d920442f72dbb72e
+guid: aaeabb9d88fa22c4bbdcc14961f18e5c
 TextureImporter:
   fileIDToRecycleName:
-    21300000: Humanal_0
-    21300002: Humanal_1
-    21300004: Humanal_2
-    21300006: Humanal_3
-    21300008: Humanal_4
-    21300010: Humanal_5
+    21300000: projectile_0
+    21300002: projectile_1
+    21300004: projectile_2
+    21300006: projectile_3
   externalObjects: {}
   serializedVersion: 7
   mipmaps:
@@ -90,67 +88,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Humanal_0
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 32
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 536645950c8cd8f4cae18f279fe6ff1e
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Humanal_1
-      rect:
-        serializedVersion: 2
-        x: 32
-        y: 32
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 9e7e6da8a20b41d499ca62d15561c6e8
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Humanal_2
-      rect:
-        serializedVersion: 2
-        x: 64
-        y: 32
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 103f86ea944ffb14c8a5ca2f173b57c9
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Humanal_3
+      name: projectile_0
       rect:
         serializedVersion: 2
         x: 0
@@ -164,13 +102,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 181e9adeb0db3e64f860061298a6222d
+      spriteID: 01cf254c558a0bc4c96e8a5273004e96
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Humanal_4
+      name: projectile_1
       rect:
         serializedVersion: 2
         x: 32
@@ -184,13 +122,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7c01e78b4737daf4cbea125d47a51d7b
+      spriteID: 0c4a5018bdd3f0040a54c1e91eabc60e
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Humanal_5
+      name: projectile_2
       rect:
         serializedVersion: 2
         x: 64
@@ -204,7 +142,27 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6d1d57b59e6572f4c91c96392ce343df
+      spriteID: e90f863b3a1e0df4c8588c05cec7e420
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: projectile_3
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0fbeb7b20ad3e304bb1515dcc9575de1
       vertices: []
       indices: 
       edges: []
@@ -212,7 +170,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 766d35d1cc5519242abc528bff9908bf
+    spriteID: b01882fd7553f9046a5ff4456cf2fe5e
     vertices: []
     indices: 
     edges: []

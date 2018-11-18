@@ -5,19 +5,6 @@ using UnityEventAggregator;
 
 public class PlayerController : MonoBehaviour, IHasAttack, IAttackable
 {
-    [System.Serializable]
-    public class PlayerStats
-    {
-        [SerializeField]
-        public float MaxSpeed = 10.0f;
-        public float RangedDelay = 0.8f;
-        public float RangedDamage = 1.0f;
-        public float RangedRange = 1.0f;
-        public float RangedSpeed = 1.0f;
-        public float MeleeRange = 1;
-        public float MeleeDamage = 2.0f;
-    }
-
     [SerializeField]
     PlayerStats m_playerStats = new PlayerStats();
 
@@ -41,8 +28,8 @@ public class PlayerController : MonoBehaviour, IHasAttack, IAttackable
     Rigidbody2D m_rigidbody;
     SpriteRenderer[] m_renderers;
 
-    float m_health = 0.0f;
-    float m_startHealth = 1.0f;
+    int m_health = 0;
+    int m_maxHealth = 0;
 
     float m_lastFireTime = 0;
 
@@ -153,20 +140,32 @@ public class PlayerController : MonoBehaviour, IHasAttack, IAttackable
 
     public void OnHit(float damage)
     {
-        m_health -= damage;
-
-        EventAggregator.SendMessage(new PlayerHealthChangedEvent()
-        {
-            NewData = m_health,
-            OldData = m_health + damage,
-            Normalised = m_health / m_startHealth
-        });
+        //Do we have varying damage on the player? I like the idea of 1 "hit" being one health but this may need to be revisited
+        UpdateHealth(0, -1);
     }
 
-    public void SetStartHealth(float health)
+    public void SetStartHealth(int health)
     {
-        m_startHealth = m_health = health;
+        UpdateHealth(health, health);
+    }
 
-        EventAggregator.SendMessage(new PlayerHealthChangedEvent() { NewData = m_health, Normalised = 1.0f });
+    void UpdateHealth(int changeMax, int changeCurrent)
+    {
+        if(changeMax != 0 || changeCurrent != 0)
+        {
+            int oldCurrent = m_health;
+            int oldMax = m_maxHealth;
+
+            m_health += changeCurrent;
+            m_maxHealth += changeMax;
+
+            EventAggregator.SendMessage(new PlayerHealthChangedEvent()
+            {
+                NewData = new PlayerHealthState() { Current = m_health, Max = m_maxHealth },
+                OldData = new PlayerHealthState() { Current = oldCurrent, Max = oldMax }
+            });
+
+        }
+        
     }
 }

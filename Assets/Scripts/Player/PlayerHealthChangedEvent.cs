@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerHealthChangedEvent : ChangedEvent<float>
+public class PlayerHealthChangedEvent : ChangedEvent<PlayerHealthState>
 {
-    public float Normalised { get; set; }
+    public PlayerHealthState HealthState { get; set; }
 }

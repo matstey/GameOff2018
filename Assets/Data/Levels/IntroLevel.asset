@@ -13,4 +13,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_mapPrefab: {fileID: 114639866402958696, guid: 50ad15521cb9f904e8afc562451509e3,
     type: 2}
-  m_startHealth: 50
+  m_startHealth: 6
