@@ -3,19 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEventAggregator;
 
+[RequireComponent(typeof(PlayerAnimationManager))]
+[RequireComponent(typeof(Rigidbody2D))]
 public class PlayerController : MonoBehaviour, IHasAttack, IAttackable
 {
     [SerializeField]
     PlayerStats m_playerStats = new PlayerStats();
-
-    [SerializeField]
-    float m_maxWalkAnimSpeed = 0.5f;
-
-    [SerializeField]
-    Animator m_bodyAnimController;
-
-    [SerializeField]
-    Animator m_legsAnimController;
 
     [SerializeField]
     LayerMask m_attackMask;
@@ -23,10 +16,26 @@ public class PlayerController : MonoBehaviour, IHasAttack, IAttackable
     [SerializeField]
     Projectile m_projectilePrefab;
 
-    public bool Attacking { get; set; } = false;
+    bool m_attacking = false;
+    public bool Attacking
+    {
+        get
+        {
+            return m_attacking;
+        }
+        set
+        {
+            m_attacking = value;
+
+            if(m_animationManager)
+            {
+                m_animationManager.Attacking = value;
+            }
+        }
+    }
 
     Rigidbody2D m_rigidbody;
-    SpriteRenderer[] m_renderers;
+    PlayerAnimationManager m_animationManager;
 
     int m_health = 0;
     int m_maxHealth = 0;
@@ -36,13 +45,13 @@ public class PlayerController : MonoBehaviour, IHasAttack, IAttackable
     public bool IsAlive { get { return m_health > 0.0f; } }
 
     // Use this for initialization
-    void Start () {
+    private void Awake () {
         m_rigidbody = GetComponent<Rigidbody2D>();
-        m_renderers = GetComponentsInChildren<SpriteRenderer>();
+        m_animationManager = GetComponent<PlayerAnimationManager>();
     }
 	
 	// Update is called once per frame
-	void Update ()
+	private void Update ()
     {
         float rangedAttackX = Input.GetAxis("FireHorizontal");
         float rangedAttackY = Input.GetAxis("FireVertical");
@@ -93,25 +102,13 @@ public class PlayerController : MonoBehaviour, IHasAttack, IAttackable
 
         m_rigidbody.velocity = move * m_playerStats.MaxSpeed;
 
-        float animSpeed = move.magnitude * m_maxWalkAnimSpeed;
-
-        m_legsAnimController.speed = animSpeed;
-        m_bodyAnimController.speed = Attacking ? 1.0f : animSpeed;
-        
-        if (animSpeed <= 0.01)
-        {
-            m_legsAnimController.Play("LegsRun", -1, 0.0f);
-        }
-
-        if(moveX != 0)
-        {
-            SetDirection(moveX < 0);
-        }
+        m_animationManager.Move(move);
     }
 
     void Attack()
     {
-        m_bodyAnimController.SetTrigger("Attack");
+        m_animationManager.AttackMelee();
+        m_animationManager.Hit();
 
         Collider2D hit = Physics2D.OverlapCircle(transform.position, m_playerStats.MeleeRange, m_attackMask);
         if (hit != null)
@@ -122,6 +119,8 @@ public class PlayerController : MonoBehaviour, IHasAttack, IAttackable
 
     void AttackRanged(Vector2 direction)
     {
+        m_animationManager.AttackRanged();
+
         Projectile proj = Instantiate(m_projectilePrefab, transform.position, Quaternion.identity) as Projectile;
         if (proj != null)
         {
@@ -130,14 +129,6 @@ public class PlayerController : MonoBehaviour, IHasAttack, IAttackable
             proj.Damage = m_playerStats.RangedDamage;
 
             proj.Fire(direction);
-        }
-    }
-
-    void SetDirection(bool left)
-    {
-        foreach (SpriteRenderer r in m_renderers)
-        {
-            r.flipX = left;
         }
     }
 

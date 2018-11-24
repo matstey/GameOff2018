@@ -1,19 +1,19 @@
 fileFormatVersion: 2
-guid: 2d86bc8b5daf5a242883c3c17d6629b3
+guid: d6c96bf446d1c044a86d6a20fe80bef1
 TextureImporter:
   fileIDToRecycleName:
-    21300000: BaseLegs_0
-    21300002: BaseLegs_1
-    21300004: BaseLegs_2
-    21300006: BaseLegs_3
-    21300008: BaseLegs_4
-    21300010: BaseLegs_5
-    21300012: BaseLegs_6
-    21300014: BaseLegs_7
-    21300016: BaseLegs_8
-    21300018: BaseLegs_9
-    21300020: BaseLegs_10
-    21300022: BaseLegs_11
+    21300000: BearBody_0
+    21300002: BearBody_1
+    21300004: BearBody_2
+    21300006: BearBody_3
+    21300008: BearBody_4
+    21300010: BearBody_5
+    21300012: BearBody_6
+    21300014: BearBody_7
+    21300016: BearBody_8
+    21300018: BearBody_9
+    21300020: BearBody_10
+    21300022: BearBody_11
   externalObjects: {}
   serializedVersion: 7
   mipmaps:
@@ -96,7 +96,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: BaseLegs_0
+      name: BearBody_0
       rect:
         serializedVersion: 2
         x: 0
@@ -110,13 +110,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 65ab2dfa274dacd4f8740f66d800d066
+      spriteID: 3fc1c7aa19e853049a4e89951bdc91f8
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: BaseLegs_1
+      name: BearBody_1
       rect:
         serializedVersion: 2
         x: 32
@@ -130,13 +130,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0a6f7a169ac21cc49be2819d0b6a0c8e
+      spriteID: 8acb6844b8bc26a4d9cf4dda3e46c692
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: BaseLegs_2
+      name: BearBody_2
       rect:
         serializedVersion: 2
         x: 64
@@ -150,13 +150,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: bd29bb51cd00ce84eb6a88d0b9deb001
+      spriteID: 263d9f3aef8cbb5458940f1c15e1a80f
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: BaseLegs_3
+      name: BearBody_3
       rect:
         serializedVersion: 2
         x: 96
@@ -170,13 +170,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9464282e9c80ce347a35fc4e44ba4cc2
+      spriteID: ad63369344533e749abd3691027d0b94
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: BaseLegs_4
+      name: BearBody_4
       rect:
         serializedVersion: 2
         x: 128
@@ -190,13 +190,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f00cd21d0afca8f4580b84e628e0d6b6
+      spriteID: 7ba74e222e9af594686c69d096b45635
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: BaseLegs_5
+      name: BearBody_5
       rect:
         serializedVersion: 2
         x: 160
@@ -210,13 +210,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 58699f6b82c1eb94f805de55fd5c0214
+      spriteID: c9fa5f3f44e25c648be05a2cdd7d0659
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: BaseLegs_6
+      name: BearBody_6
       rect:
         serializedVersion: 2
         x: 0
@@ -230,13 +230,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3e930b82de0e56e48b0ba3c59b6b4dff
+      spriteID: 079343d0e4e00144babeb81f1d4642c3
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: BaseLegs_7
+      name: BearBody_7
       rect:
         serializedVersion: 2
         x: 32
@@ -250,13 +250,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8124c19cf7f08f5409e9dcd8f5bd1c47
+      spriteID: f4880f6cb1f61fb4db51d65bc0729fb8
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: BaseLegs_8
+      name: BearBody_8
       rect:
         serializedVersion: 2
         x: 64
@@ -270,13 +270,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: beb74a8991076374dbcdf8d08d7950cf
+      spriteID: ddd01273dc488ad45a77b080b2908d69
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: BaseLegs_9
+      name: BearBody_9
       rect:
         serializedVersion: 2
         x: 96
@@ -290,13 +290,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 776350d93b7b00a4f933b06836ed62f7
+      spriteID: 04e2ddb5e4acaee4b94417a758750a0d
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: BaseLegs_10
+      name: BearBody_10
       rect:
         serializedVersion: 2
         x: 128
@@ -310,13 +310,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4ea10edd0e18cc54e843fb4ba548679a
+      spriteID: b488b79abf95ea24991f32ec435fd0d8
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: BaseLegs_11
+      name: BearBody_11
       rect:
         serializedVersion: 2
         x: 160
@@ -330,7 +330,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4ceb94fc3a3c96244bbab735b8420733
+      spriteID: a3a6d228e5222314289be5ea91a2d2bb
       vertices: []
       indices: 
       edges: []
@@ -338,7 +338,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 79d395f731325e3479fda04cbc56ef97
+    spriteID: 7a2252dead03a2f4888dba78f6ae2a09
     vertices: []
     indices: 
     edges: []
