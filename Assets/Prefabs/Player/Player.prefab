@@ -255,6 +255,8 @@ MonoBehaviour:
     RangedSpeed: 5
     MeleeRange: 1
     MeleeDamage: 2
+    HasMelee: 1
+    HasRanged: 1
   m_attackMask:
     serializedVersion: 2
     m_Bits: 256

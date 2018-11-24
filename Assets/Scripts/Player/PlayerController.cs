@@ -160,6 +160,7 @@ public class PlayerController : MonoBehaviour, IHasAttack, IAttackable
 
             if (modifier.ReplacementAnimator != null)
             {
+                Attacking = false;
                 m_animationManager.ReplaceController(modifier.ReplacementAnimator, modifier.Type);
             }
         }

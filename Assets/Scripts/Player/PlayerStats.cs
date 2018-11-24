@@ -11,4 +11,6 @@ public class PlayerStats
     public float RangedSpeed;
     public float MeleeRange;
     public float MeleeDamage;
+    public bool HasMelee = true;
+    public bool HasRanged = true;
 }

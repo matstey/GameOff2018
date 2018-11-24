@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEditor.Animations;
 using UnityEngine;
 
-public class PlayerModifier : MonoBehaviour
+[CreateAssetMenu(fileName = "NewPlayerModifier", menuName = "PlayerModifier", order = 1)]
+public class PlayerModifier : ScriptableObject
 {
     public enum ModifierType
     {
