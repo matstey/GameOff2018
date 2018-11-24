@@ -108,7 +108,6 @@ public class PlayerController : MonoBehaviour, IHasAttack, IAttackable
     void Attack()
     {
         m_animationManager.AttackMelee();
-        m_animationManager.Hit();
 
         Collider2D hit = Physics2D.OverlapCircle(transform.position, m_playerStats.MeleeRange, m_attackMask);
         if (hit != null)
@@ -136,6 +135,7 @@ public class PlayerController : MonoBehaviour, IHasAttack, IAttackable
     {
         //Do we have varying damage on the player? I like the idea of 1 "hit" being one health but this may need to be revisited
         UpdateHealth(0, -1);
+        m_animationManager.Hit();
     }
 
     public void AddModifier(PlayerModifier modifier)
