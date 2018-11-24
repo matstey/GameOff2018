@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Animations;
 using UnityEngine;
 
 public class PlayerModifier : MonoBehaviour
@@ -18,11 +19,10 @@ public class PlayerModifier : MonoBehaviour
     [SerializeField]
     PlayerStats m_statModifiers;
 
+    [SerializeField]
+    AnimatorController m_replacementAnimator;
+
     public ModifierType Type { get { return m_modifierType; } }
     public PlayerStats StatModifiers { get { return m_statModifiers; } }
-
-    public void OnAdded()
-    {
-
-    }
-}
+    public AnimatorController ReplacementAnimator { get { return m_replacementAnimator; } }
+} 

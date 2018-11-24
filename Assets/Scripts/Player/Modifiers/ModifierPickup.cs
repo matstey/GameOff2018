@@ -21,8 +21,12 @@ public class ModifierPickup : MonoBehaviour {
     {
         if(collision != null)
         {
-            Destroy(gameObject);
-            collision.transform.SendMessage("AddModifier", m_modifier);
+            PlayerController pc = collision.transform.GetComponent<PlayerController>();
+            if(pc != null)
+            {
+                Destroy(gameObject);
+                collision.transform.SendMessage("AddModifier", m_modifier);
+            }
         }
     }
 }

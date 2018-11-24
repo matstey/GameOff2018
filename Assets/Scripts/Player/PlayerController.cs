@@ -140,20 +140,28 @@ public class PlayerController : MonoBehaviour, IHasAttack, IAttackable
 
     public void AddModifier(PlayerModifier modifier)
     {
-        if (modifier != null && modifier.StatModifiers != null)
+        if (modifier != null)
         {
-            PlayerStats statModifier = modifier.StatModifiers;
+            if (modifier.StatModifiers != null)
+            {
+                PlayerStats statModifier = modifier.StatModifiers;
 
-            //Health is treat differently, do we need a more generic way of doing this? Events for each?
-            UpdateHealth(statModifier.MaxHealth, 0);
+                //Health is treat differently, do we need a more generic way of doing this? Events for each?
+                UpdateHealth(statModifier.MaxHealth, 0);
 
-            m_playerStats.MaxSpeed += statModifier.MaxSpeed;
-            m_playerStats.RangedDelay += statModifier.RangedDelay;
-            m_playerStats.RangedDamage += statModifier.RangedDamage;
-            m_playerStats.RangedRange += statModifier.RangedRange;
-            m_playerStats.RangedSpeed += statModifier.RangedSpeed;
-            m_playerStats.MeleeRange += statModifier.MeleeRange;
-            m_playerStats.MeleeDamage += statModifier.MeleeDamage;
+                m_playerStats.MaxSpeed += statModifier.MaxSpeed;
+                m_playerStats.RangedDelay += statModifier.RangedDelay;
+                m_playerStats.RangedDamage += statModifier.RangedDamage;
+                m_playerStats.RangedRange += statModifier.RangedRange;
+                m_playerStats.RangedSpeed += statModifier.RangedSpeed;
+                m_playerStats.MeleeRange += statModifier.MeleeRange;
+                m_playerStats.MeleeDamage += statModifier.MeleeDamage;
+            }
+
+            if (modifier.ReplacementAnimator != null)
+            {
+                m_animationManager.ReplaceController(modifier.ReplacementAnimator, modifier.Type);
+            }
         }
     }
 

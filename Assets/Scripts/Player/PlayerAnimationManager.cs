@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using UnityEditor.Animations;
 using UnityEngine;
 
 public class PlayerAnimationManager : MonoBehaviour {
@@ -34,7 +35,7 @@ public class PlayerAnimationManager : MonoBehaviour {
 
     public void AttackRanged()
     {
-
+        m_bodyAnimController.SetTrigger("Attack");
     }
 
     public void Move(Vector2 move)
@@ -49,8 +50,12 @@ public class PlayerAnimationManager : MonoBehaviour {
         if (animSpeed <= 0.01)
         {
             m_headAnimController.Play("Run", -1, 0.0f);
-            m_bodyAnimController.Play("Run", -1, 0.0f);
             m_legsAnimController.Play("Run", -1, 0.0f);
+
+            if (!Attacking)
+            {
+                m_bodyAnimController.Play("Run", -1, 0.0f);
+            }
         }
 
         if (move.x != 0)
@@ -62,6 +67,28 @@ public class PlayerAnimationManager : MonoBehaviour {
     public async void Hit()
     {
         await Flash(m_hitTime).ConfigureAwait(true);
+    }
+
+    public void ReplaceController(AnimatorController controller, PlayerModifier.ModifierType type)
+    {
+        Animator anim = null;
+        switch (type)
+        {
+            case PlayerModifier.ModifierType.Head:
+                anim = m_headAnimController;
+                break;
+            case PlayerModifier.ModifierType.Body:
+                anim = m_bodyAnimController;
+                break;
+            case PlayerModifier.ModifierType.Legs:
+                anim = m_legsAnimController;
+                break;
+        }
+
+        if (anim != null)
+        {
+            anim.runtimeAnimatorController = controller;
+        }
     }
 
     void SetSpriteColor(Color col)
