@@ -6,14 +6,14 @@ using UnityEventAggregator;
 public class SpawnPoint : MonoBehaviour, IListener<GameStateChangedEvent>
 {
     [SerializeField]
-    Enemy[] m_enemyPrefabs;
+    EnemyController[] m_enemyPrefabs;
 
     [SerializeField]
     float m_spawnRate = 10; // Seconds
 
     float m_lastSpawn = 0;
 
-    List<Enemy> m_spawned = new List<Enemy>();
+    List<EnemyController> m_spawned = new List<EnemyController>();
 
     void Awake()
     {
@@ -48,7 +48,7 @@ public class SpawnPoint : MonoBehaviour, IListener<GameStateChangedEvent>
 
     void SetActive(bool active)
     {
-        foreach (Enemy enemy in m_spawned)
+        foreach (EnemyController enemy in m_spawned)
         {
             if (enemy)
             {
@@ -59,7 +59,7 @@ public class SpawnPoint : MonoBehaviour, IListener<GameStateChangedEvent>
 
     void OnDestroy()
     {
-        foreach(Enemy enemy in m_spawned)
+        foreach(EnemyController enemy in m_spawned)
         {
             if (enemy)
             {
@@ -73,13 +73,13 @@ public class SpawnPoint : MonoBehaviour, IListener<GameStateChangedEvent>
 
     void Spawn()
     {
-        Enemy enemy = Instantiate(m_enemyPrefabs[0], transform.position, transform.rotation);
+        EnemyController enemy = Instantiate(m_enemyPrefabs[0], transform.position, transform.rotation);
         enemy.Died += OnEnemyDied;
 
         m_spawned.Add(enemy);
     }
 
-    void OnEnemyDied(Enemy enemy)
+    void OnEnemyDied(EnemyController enemy)
     {
         if(m_spawned.Contains(enemy))
         {

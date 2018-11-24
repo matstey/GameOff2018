@@ -147,7 +147,7 @@ public class PlayerController : MonoBehaviour, IHasAttack, IAttackable
                 PlayerStats statModifier = modifier.StatModifiers;
 
                 //Health is treat differently, do we need a more generic way of doing this? Events for each?
-                UpdateHealth(statModifier.MaxHealth, 0);
+                UpdateHealth(statModifier.MaxHealth, statModifier.MaxHealth);
 
                 m_playerStats.MaxSpeed += statModifier.MaxSpeed;
                 m_playerStats.RangedDelay += statModifier.RangedDelay;

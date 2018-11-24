@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Enemy : MonoBehaviour, IHasAttack, IAttackable
+public class EnemyController : MonoBehaviour, IHasAttack, IAttackable
 {
     enum AIState
     {
@@ -43,7 +43,7 @@ public class Enemy : MonoBehaviour, IHasAttack, IAttackable
 
     public bool Attacking { get; set; } = false;
 
-    public event System.Action<Enemy> Died;
+    public event System.Action<EnemyController> Died;
 
     Rigidbody2D m_rigidbody;
     SpriteRenderer[] m_renderers;
