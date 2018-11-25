@@ -41,6 +41,11 @@ public class PlayerController : MonoBehaviour, IHasAttack, IAttackable
     int m_maxHealth = 0;
 
     float m_lastFireTime = 0;
+    Vector2 m_knockback = new Vector2(0, 0);
+    Vector2 m_knockbackVelocity = new Vector2();
+
+    float m_invincibilityTime = 0.5f;
+    float m_hitTime = 0;
 
     public bool IsAlive { get { return m_health > 0.0f; } }
 
@@ -100,9 +105,14 @@ public class PlayerController : MonoBehaviour, IHasAttack, IAttackable
             move.Normalize();
         }
 
-        m_rigidbody.velocity = move * m_playerStats.MaxSpeed;
-
         m_animationManager.Move(move);
+
+        Vector2 newVelocity = move * m_playerStats.MaxSpeed;
+        newVelocity += m_knockback;
+
+        m_rigidbody.velocity = newVelocity;
+
+        m_knockback = Vector2.SmoothDamp(m_knockback, Vector2.zero, ref m_knockbackVelocity, 0.2f);
     }
 
     void Attack()
@@ -114,7 +124,12 @@ public class PlayerController : MonoBehaviour, IHasAttack, IAttackable
             Collider2D hit = Physics2D.OverlapCircle(transform.position, m_playerStats.MeleeRange, m_attackMask);
             if (hit != null)
             {
-                hit.transform.SendMessage("OnHit", (hit.transform.position - transform.position).magnitude);
+                IAttackable t = hit.GetComponent<IAttackable>();
+                if (t != null)
+                {
+                    Vector2 dir = hit.transform.position - transform.position;
+                    t.OnHit(m_playerStats.MeleeDamage, dir);
+                }
             }
         }
     }
@@ -137,11 +152,17 @@ public class PlayerController : MonoBehaviour, IHasAttack, IAttackable
         }
     }
 
-    public void OnHit(float damage)
+    public void OnHit(int damage, Vector2 direction)
     {
-        //Do we have varying damage on the player? I like the idea of 1 "hit" being one health but this may need to be revisited
-        UpdateHealth(0, -1);
-        m_animationManager.Hit();
+        if(m_hitTime == 0 || Time.time - m_hitTime > m_invincibilityTime)
+        {
+            m_hitTime = Time.time;
+
+            //Do we have varying damage on the player? I like the idea of 1 "hit" being one health but this may need to be revisited
+            UpdateHealth(0, -damage);
+            m_knockback = direction * 5;
+            m_animationManager.Hit(m_invincibilityTime);
+        }
     }
 
     public void AddModifier(PlayerModifier modifier)

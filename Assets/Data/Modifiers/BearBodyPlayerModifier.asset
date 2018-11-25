@@ -20,7 +20,7 @@ MonoBehaviour:
     RangedRange: 0
     RangedSpeed: 0
     MeleeRange: 0
-    MeleeDamage: 0
+    MeleeDamage: 1
     HasMelee: 1
     HasRanged: 0
   m_replacementAnimator: {fileID: 9100000, guid: 4ddd848b9607e1c4a85c7505163173fa,

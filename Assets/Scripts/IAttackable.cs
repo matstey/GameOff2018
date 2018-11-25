@@ -4,5 +4,5 @@ using UnityEngine;
 
 public interface IAttackable
 {
-    void OnHit(float damage);
+    void OnHit(int damage, Vector2 dir);
 }

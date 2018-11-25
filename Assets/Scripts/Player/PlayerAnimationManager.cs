@@ -21,9 +21,6 @@ public class PlayerAnimationManager : MonoBehaviour {
     float m_maxWalkAnimSpeed = 0.5f;
 
     [SerializeField]
-    float m_hitTime = 2.0f;
-
-    [SerializeField]
     Color m_hitColor = Color.red;
 
     SpriteRenderer[] m_renderers;
@@ -64,9 +61,9 @@ public class PlayerAnimationManager : MonoBehaviour {
         }
     }
 
-    public void Hit()
+    public void Hit(float invincibilityTime)
     {
-        StartCoroutine(Flash(m_hitTime));
+        StartCoroutine(Flash(invincibilityTime));
     }
 
     public void ReplaceController(AnimatorController controller, PlayerModifier.ModifierType type)
@@ -106,21 +103,10 @@ public class PlayerAnimationManager : MonoBehaviour {
         while (Time.time - m_startTime < duration)
         {
             SetSpriteColor(m_hitColor);
-            yield return new WaitForSeconds(0.15f);
+            yield return new WaitForSeconds(0.1f);
             SetSpriteColor(Color.white);
-            yield return new WaitForSeconds(0.15f);
+            yield return new WaitForSeconds(0.2f);
         }
-    }
-
-    public void SetAnimation(PlayerModifier.ModifierType type, Animation newAnim)
-    {
-        /*
-        switch (type)
-        {
-            case PlayerModifier.ModifierType.Body:
-                m_bodyAnimController.anim
-        }
-        */
     }
 
     private void SetDirection(bool left)

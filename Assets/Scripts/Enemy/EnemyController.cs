@@ -242,7 +242,13 @@ public class EnemyController : MonoBehaviour, IHasAttack, IAttackable
     void Attack(GameObject target)
     {
         m_animationManager.Attack();
-        target.SendMessage("OnHit", 10);
+
+        IAttackable t = target.GetComponent<IAttackable>();
+        if(t != null)
+        {
+            Vector2 dir = target.transform.position - transform.position;
+            t.OnHit(1, dir);
+        }
     }
 
 
@@ -252,7 +258,7 @@ public class EnemyController : MonoBehaviour, IHasAttack, IAttackable
         m_animationManager.Move(Vector2.zero);
     }
 
-    public void OnHit(float damage)
+    public void OnHit(int damage, Vector2 dir)
     {
         m_animationManager.Hit();
 

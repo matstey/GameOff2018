@@ -8,7 +8,7 @@ using UnityEngine;
 public class Projectile : MonoBehaviour
 {
     public float Range { get; set; }
-    public float Damage { get; set; }
+    public int Damage { get; set; }
     public float Speed { get; set; }
 
     Animator m_animator;
@@ -54,7 +54,8 @@ public class Projectile : MonoBehaviour
         IAttackable hitObj = collision.gameObject.GetComponent<IAttackable>();
         if (hitObj != null)
         {
-            collision.gameObject.SendMessage("OnHit", Damage);
+            Vector2 dir = (transform.position - collision.gameObject.transform.position).normalized;
+            hitObj.OnHit(Damage, dir);
         }
     }
 
