@@ -73,7 +73,7 @@ public class SpawnPoint : MonoBehaviour, IListener<GameStateChangedEvent>
 
     void Spawn()
     {
-        EnemyController enemy = Instantiate(m_enemyPrefabs[0], transform.position, transform.rotation);
+        EnemyController enemy = Instantiate(m_enemyPrefabs[Random.Range(0, m_enemyPrefabs.Length)], transform.position, transform.rotation);
         enemy.Died += OnEnemyDied;
 
         m_spawned.Add(enemy);
