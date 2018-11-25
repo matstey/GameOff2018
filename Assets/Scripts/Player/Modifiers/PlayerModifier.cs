@@ -6,16 +6,23 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "NewPlayerModifier", menuName = "PlayerModifier", order = 1)]
 public class PlayerModifier : ScriptableObject
 {
-    public enum ModifierType
+    public enum BodyPart
     {
+        None,
         Head,
         Body,
-        Legs, 
-        Accessory
+        Legs
+    }
+
+    public enum MeleeModifierType
+    {
+        None,
+        Bite,
+        Charge
     }
 
     [SerializeField]
-    ModifierType m_modifierType;
+    BodyPart m_modifierType;
 
     [SerializeField]
     PlayerStats m_statModifiers;
@@ -23,7 +30,11 @@ public class PlayerModifier : ScriptableObject
     [SerializeField]
     RuntimeAnimatorController m_replacementAnimator;
 
-    public ModifierType Type { get { return m_modifierType; } }
+    [SerializeField]
+    MeleeModifierType m_meleeModifierType = PlayerModifier.MeleeModifierType.None;
+
+    public MeleeModifierType MeleeModifier { get { return m_meleeModifierType; } }
+    public BodyPart Type { get { return m_modifierType; } }
     public PlayerStats StatModifiers { get { return m_statModifiers; } }
     public RuntimeAnimatorController ReplacementAnimator { get { return m_replacementAnimator; } }
 } 

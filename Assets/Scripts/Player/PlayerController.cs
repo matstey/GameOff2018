@@ -41,6 +41,8 @@ public class PlayerController : MonoBehaviour, IHasAttack, IAttackable
     int m_maxHealth = 0;
 
     float m_lastFireTime = 0;
+    float m_lastMeleeTime = 0;
+
     Vector2 m_knockback = new Vector2(0, 0);
     Vector2 m_knockbackVelocity = new Vector2();
 
@@ -49,6 +51,8 @@ public class PlayerController : MonoBehaviour, IHasAttack, IAttackable
     bool m_dir = false;
 
     MeleeModifier m_meleeModifier = null;
+    PlayerModifier.BodyPart m_meleeAttackPart = PlayerModifier.BodyPart.Body;
+    PlayerModifier.BodyPart m_rangedAttackPart = PlayerModifier.BodyPart.Body;
 
     public bool IsAlive { get { return m_health > 0.0f; } }
 
@@ -75,7 +79,8 @@ public class PlayerController : MonoBehaviour, IHasAttack, IAttackable
             {
                 m_meleeModifier.Update(melee, m_dir);
             }
-            else if (melee)
+
+            if ((m_meleeModifier == null || !m_meleeModifier.ReplacesAttack) && melee)
             {
                 Attack();
             }
@@ -132,9 +137,11 @@ public class PlayerController : MonoBehaviour, IHasAttack, IAttackable
 
     void Attack()
     {
-        if (m_playerStats.HasMelee)
+        if (m_playerStats.HasMelee && Time.time - m_lastMeleeTime > m_playerStats.MeleeDelay)
         {
-            m_animationManager.AttackMelee();
+            m_lastMeleeTime = Time.time;
+            m_meleeModifier?.OnBaseAttack();
+            m_animationManager.AttackMelee(m_meleeAttackPart);
 
             Collider2D hit = Physics2D.OverlapCircle(transform.position, m_playerStats.MeleeRange, m_attackMask);
             if (hit != null)
@@ -153,7 +160,7 @@ public class PlayerController : MonoBehaviour, IHasAttack, IAttackable
     {
         if(m_playerStats.HasRanged)
         {
-            m_animationManager.AttackRanged();
+            m_animationManager.AttackRanged(m_rangedAttackPart);
 
             Projectile proj = Instantiate(m_projectilePrefab, transform.position, Quaternion.identity) as Projectile;
             if (proj != null)
@@ -182,11 +189,14 @@ public class PlayerController : MonoBehaviour, IHasAttack, IAttackable
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        IAttackable hitObj = collision.gameObject.GetComponent<IAttackable>();
-        if (hitObj != null)
+        if(m_meleeModifier != null && m_meleeModifier.ContactDamage)
         {
-            Vector2 dir = (transform.position - collision.gameObject.transform.position).normalized;
-            hitObj.OnHit(m_playerStats.MeleeDamage, dir);
+            IAttackable hitObj = collision.gameObject.GetComponent<IAttackable>();
+            if (hitObj != null)
+            {
+                Vector2 dir = (transform.position - collision.gameObject.transform.position).normalized;
+                hitObj.OnHit(m_playerStats.MeleeDamage, dir);
+            }
         }
     }
 
@@ -194,9 +204,17 @@ public class PlayerController : MonoBehaviour, IHasAttack, IAttackable
     {
         if (modifier != null)
         {
-            if (modifier.Type == PlayerModifier.ModifierType.Head)
+            switch(modifier.MeleeModifier)
             {
-                m_meleeModifier = new ChargeMeleeModifier(m_rigidbody, m_animationManager);
+                case PlayerModifier.MeleeModifierType.Charge:
+                    m_meleeModifier = new ChargeMeleeModifier(m_rigidbody, m_animationManager);
+                    break;
+                case PlayerModifier.MeleeModifierType.Bite:
+                    m_meleeModifier = new BiteMeleeModifier(m_rigidbody, m_animationManager);
+                    m_meleeAttackPart = PlayerModifier.BodyPart.Head;
+                    break;
+                default:
+                    break;
             }
 
             if (modifier.StatModifiers != null)

@@ -15,6 +15,8 @@ public class ChargeMeleeModifier : MeleeModifier
 
     public override bool CanMove { get { return !m_charging; } }
     public override bool ContactDamage { get { return m_charging; } }
+    public override bool ReplacesAttack { get; } = true;
+
 
     public ChargeMeleeModifier(Rigidbody2D rigidbody, PlayerAnimationManager animationManager) : base(rigidbody, animationManager)
     {

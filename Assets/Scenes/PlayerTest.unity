@@ -157,10 +157,15 @@ Prefab:
       propertyPath: m_RootOrder
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 114740123869552306, guid: 60790655c9569b342b20ee1bdda983e5,
+        type: 2}
+      propertyPath: m_playerStats.MeleeDelay
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 60790655c9569b342b20ee1bdda983e5, type: 2}
   m_IsPrefabAsset: 0
---- !u!1001 &453230178
+--- !u!1001 &493173638
 Prefab:
   m_ObjectHideFlags: 0
   serializedVersion: 2

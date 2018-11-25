@@ -27,14 +27,34 @@ public class PlayerAnimationManager : MonoBehaviour {
 
     SpriteRenderer[] m_renderers;
 
-    public void AttackMelee()
+    public void AttackMelee(PlayerModifier.BodyPart attackPart)
     {
-        m_bodyAnimController.SetTrigger("MeleeAttack");
+        switch(attackPart)
+        {
+            case PlayerModifier.BodyPart.Body:
+                m_bodyAnimController.SetTrigger("MeleeAttack");
+                break;
+            case PlayerModifier.BodyPart.Head:
+                m_headAnimController.SetTrigger("MeleeAttack");
+                break;
+        }
+
+        m_legsAnimController.SetTrigger("MeleeAttack");
     }
 
-    public void AttackRanged()
+    public void AttackRanged(PlayerModifier.BodyPart attackPart)
     {
-        m_bodyAnimController.SetTrigger("RangedAttack");
+        switch (attackPart)
+        {
+            case PlayerModifier.BodyPart.Body:
+                m_bodyAnimController.SetTrigger("RangedAttack");
+                break;
+            case PlayerModifier.BodyPart.Head:
+                m_headAnimController.SetTrigger("RangedAttack");
+                break;
+        }
+
+        m_legsAnimController.SetTrigger("RangedAttack");
     }
 
     public void Move(Vector2 move)
@@ -68,18 +88,18 @@ public class PlayerAnimationManager : MonoBehaviour {
         StartCoroutine(Flash(invincibilityTime, m_hitColor));
     }
 
-    public void ReplaceController(RuntimeAnimatorController controller, PlayerModifier.ModifierType type)
+    public void ReplaceController(RuntimeAnimatorController controller, PlayerModifier.BodyPart type)
     {
         Animator anim = null;
         switch (type)
         {
-            case PlayerModifier.ModifierType.Head:
+            case PlayerModifier.BodyPart.Head:
                 anim = m_headAnimController;
                 break;
-            case PlayerModifier.ModifierType.Body:
+            case PlayerModifier.BodyPart.Body:
                 anim = m_bodyAnimController;
                 break;
-            case PlayerModifier.ModifierType.Legs:
+            case PlayerModifier.BodyPart.Legs:
                 anim = m_legsAnimController;
                 break;
         }

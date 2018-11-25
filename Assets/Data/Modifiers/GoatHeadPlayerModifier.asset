@@ -11,7 +11,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d38c7e811748f4748a95deade8d025af, type: 3}
   m_Name: GoatHeadPlayerModifier
   m_EditorClassIdentifier: 
-  m_modifierType: 0
+  m_modifierType: 1
   m_statModifiers:
     MaxHealth: 0
     MaxSpeed: 2
@@ -21,7 +21,9 @@ MonoBehaviour:
     RangedSpeed: 0
     MeleeRange: 0
     MeleeDamage: 2
+    MeleeDelay: 0
     HasMelee: 1
     HasRanged: 1
   m_replacementAnimator: {fileID: 9100000, guid: 6724a7760bbc97941a99974342647a45,
     type: 2}
+  m_meleeModifierType: 2
