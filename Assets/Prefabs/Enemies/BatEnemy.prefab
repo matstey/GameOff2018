@@ -40,6 +40,7 @@ GameObject:
   - component: {fileID: 50904935793480746}
   - component: {fileID: 114877962074054408}
   - component: {fileID: 58911400769268928}
+  - component: {fileID: 114645527774191660}
   m_Layer: 8
   m_Name: BatEnemy
   m_TagString: Untagged
@@ -67,7 +68,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1788226952842916}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 2.07, y: -9.81, z: 0}
+  m_LocalPosition: {x: 4.45, y: -0.43, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4147667971131362}
@@ -152,22 +153,32 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &114645527774191660
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1788226952842916}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54589bd5a7ad57b4f87af4c5d2e8fcd9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_maxWalkAnimSpeed: 0.3
+  m_animController: {fileID: 95912065913565320}
 --- !u!114 &114877962074054408
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1788226952842916}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ae87ddd665ce53d42bede51b4f75babb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_maxSpeed: 4
   m_roamingSpeed: 2
-  m_maxWalkAnimSpeed: 0.5
-  m_bodyAnimController: {fileID: 95912065913565320}
-  m_legsAnimController: {fileID: 0}
   m_targetTag: Player
   m_attackDistance: 2
   m_stopDistance: 1.8
@@ -203,8 +214,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 1895831849
+  m_SortingLayer: 2
   m_SortingOrder: 2
   m_Sprite: {fileID: 21300000, guid: c5f668b0204ecb14d8dee2ea69fc4ed2, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}

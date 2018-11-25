@@ -57,7 +57,7 @@ public class PlayerController : MonoBehaviour, IHasAttack, IAttackable
         float rangedAttackY = Input.GetAxis("FireVertical");
 
         bool ranged = rangedAttackX != 0 || rangedAttackY != 0;
-        bool melee = Input.GetButtonDown("Melee");
+        bool melee = Mathf.Abs(Input.GetAxis("Melee")) > 0.1f;
 
         if (!Attacking)
         {
@@ -107,27 +107,33 @@ public class PlayerController : MonoBehaviour, IHasAttack, IAttackable
 
     void Attack()
     {
-        m_animationManager.AttackMelee();
-
-        Collider2D hit = Physics2D.OverlapCircle(transform.position, m_playerStats.MeleeRange, m_attackMask);
-        if (hit != null)
+        if (m_playerStats.HasMelee)
         {
-            hit.transform.SendMessage("OnHit", (hit.transform.position - transform.position).magnitude);
+            m_animationManager.AttackMelee();
+
+            Collider2D hit = Physics2D.OverlapCircle(transform.position, m_playerStats.MeleeRange, m_attackMask);
+            if (hit != null)
+            {
+                hit.transform.SendMessage("OnHit", (hit.transform.position - transform.position).magnitude);
+            }
         }
     }
 
     void AttackRanged(Vector2 direction)
     {
-        m_animationManager.AttackRanged();
-
-        Projectile proj = Instantiate(m_projectilePrefab, transform.position, Quaternion.identity) as Projectile;
-        if (proj != null)
+        if(m_playerStats.HasRanged)
         {
-            proj.Range = m_playerStats.RangedRange;
-            proj.Speed = m_playerStats.RangedSpeed;
-            proj.Damage = m_playerStats.RangedDamage;
+            m_animationManager.AttackRanged();
 
-            proj.Fire(direction);
+            Projectile proj = Instantiate(m_projectilePrefab, transform.position, Quaternion.identity) as Projectile;
+            if (proj != null)
+            {
+                proj.Range = m_playerStats.RangedRange;
+                proj.Speed = m_playerStats.RangedSpeed;
+                proj.Damage = m_playerStats.RangedDamage;
+
+                proj.Fire(direction);
+            }
         }
     }
 
@@ -156,6 +162,8 @@ public class PlayerController : MonoBehaviour, IHasAttack, IAttackable
                 m_playerStats.RangedSpeed += statModifier.RangedSpeed;
                 m_playerStats.MeleeRange += statModifier.MeleeRange;
                 m_playerStats.MeleeDamage += statModifier.MeleeDamage;
+                m_playerStats.HasMelee &= statModifier.HasMelee;
+                m_playerStats.HasRanged &= statModifier.HasRanged;
             }
 
             if (modifier.ReplacementAnimator != null)

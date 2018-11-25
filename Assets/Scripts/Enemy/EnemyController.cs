@@ -24,15 +24,6 @@ public class EnemyController : MonoBehaviour, IHasAttack, IAttackable
     float m_roamingSpeed = 2.0f;
 
     [SerializeField]
-    float m_maxWalkAnimSpeed = 0.5f;
-
-    [SerializeField]
-    Animator m_bodyAnimController;
-
-    [SerializeField]
-    Animator m_legsAnimController;
-
-    [SerializeField]
     string m_targetTag = "Player";
 
     [SerializeField]
@@ -41,24 +32,23 @@ public class EnemyController : MonoBehaviour, IHasAttack, IAttackable
     [SerializeField]
     float m_stopDistance = 1.8f;
 
+
     public bool Attacking { get; set; } = false;
 
     public event System.Action<EnemyController> Died;
 
+    IEnemyAnimationManager m_animationManager;
     Rigidbody2D m_rigidbody;
-    SpriteRenderer[] m_renderers;
     GameObject m_target;
     AIState m_aiState = AIState.Roaming;
     Vector2 m_currentWaypoint;
     bool m_wayPointValid = false;
 
     // Use this for initialization
-    void Start()
+    void Awake()
     {
         m_rigidbody = GetComponent<Rigidbody2D>();
-        m_renderers = GetComponentsInChildren<SpriteRenderer>();
-
-        m_legsAnimController.speed = 0.0f;
+        m_animationManager = GetComponent<IEnemyAnimationManager>();
     }
 
     void FixedUpdate()
@@ -203,18 +193,7 @@ public class EnemyController : MonoBehaviour, IHasAttack, IAttackable
     void UpdateMovement(Vector2 direction, Vector2 velocity)
     {
         m_rigidbody.velocity = velocity;
-
-        float animSpeed = m_rigidbody.velocity.magnitude * m_maxWalkAnimSpeed;
-
-        m_legsAnimController.speed = animSpeed;
-        m_bodyAnimController.speed = Attacking ? 1.0f : animSpeed;
-
-        if (animSpeed <= 0.01)
-        {
-            m_legsAnimController.Play("LegsRun", -1, 0.0f);
-        }
-
-        SetDirection(direction.x < 0);
+        m_animationManager.Move(velocity);
     }
 
     void OnEnable()
@@ -260,32 +239,25 @@ public class EnemyController : MonoBehaviour, IHasAttack, IAttackable
         }
     }
 
-    void Stop()
-    {
-        m_rigidbody.velocity = Vector2.zero;
-        m_legsAnimController.Play("LegsRun", -1, 0.0f);
-        m_legsAnimController.speed = 0.0f;
-    }
-
     void Attack(GameObject target)
     {
-        m_bodyAnimController.SetTrigger("Attack");
-
+        m_animationManager.Attack();
         target.SendMessage("OnHit", 10);
     }
 
-    void SetDirection(bool left)
+
+    void Stop()
     {
-        foreach (SpriteRenderer r in m_renderers)
-        {
-            r.flipX = left;
-        }
+        m_rigidbody.velocity = Vector2.zero;
+        m_animationManager.Move(Vector2.zero);
     }
 
     public void OnHit(float damage)
     {
+        m_animationManager.Hit();
+
         // TODO: Add health
-        Died(this);
+        Died?.Invoke(this);
     }
 
     void OnDrawGizmos()

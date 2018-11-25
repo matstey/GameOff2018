@@ -94,7 +94,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &1461712266270924
 GameObject:
   m_ObjectHideFlags: 1
@@ -740,7 +740,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_enemyPrefabs:
-  - {fileID: 114201922744546786, guid: 099ebbbfbc8fa0f4492627e6eba1ac38, type: 2}
+  - {fileID: 114877962074054408, guid: 92b4a0ae87e072b4daa80b47dbb5b900, type: 2}
   m_spawnRate: 4
 --- !u!212 &212023556727311212
 SpriteRenderer:

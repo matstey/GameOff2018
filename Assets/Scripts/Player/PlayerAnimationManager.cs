@@ -64,9 +64,9 @@ public class PlayerAnimationManager : MonoBehaviour {
         }
     }
 
-    public async void Hit()
+    public void Hit()
     {
-        await Flash(m_hitTime).ConfigureAwait(true);
+        StartCoroutine(Flash(m_hitTime));
     }
 
     public void ReplaceController(AnimatorController controller, PlayerModifier.ModifierType type)
@@ -99,16 +99,16 @@ public class PlayerAnimationManager : MonoBehaviour {
         }
     }
 
-    async Task Flash(float duration)
+    IEnumerator Flash(float duration)
     {
         float m_startTime = Time.time;
 
         while (Time.time - m_startTime < duration)
         {
             SetSpriteColor(m_hitColor);
-            await Task.Delay(150);
+            yield return new WaitForSeconds(0.15f);
             SetSpriteColor(Color.white);
-            await Task.Delay(150);
+            yield return new WaitForSeconds(0.15f);
         }
     }
 
