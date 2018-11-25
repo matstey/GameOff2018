@@ -58,6 +58,12 @@ public class EnemySingleAnimationManager : MonoBehaviour, IEnemyAnimationManager
         StartCoroutine(Flash());
     }
 
+    public void Dead()
+    {
+        m_animController.speed = 1.0f;
+        m_animController.SetTrigger("Dead");
+    }
+
     void SetSpriteColor(Color col)
     {
         foreach (SpriteRenderer r in m_renderers)

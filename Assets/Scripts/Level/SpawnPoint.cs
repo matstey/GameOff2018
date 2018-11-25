@@ -83,7 +83,7 @@ public class SpawnPoint : MonoBehaviour, IListener<GameStateChangedEvent>
     {
         if(m_spawned.Contains(enemy))
         {
-            Destroy(enemy.gameObject);
+            Destroy(enemy.gameObject, 5.0f);
             m_spawned.Remove(enemy);
         }
     }

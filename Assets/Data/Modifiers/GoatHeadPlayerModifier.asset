@@ -14,7 +14,7 @@ MonoBehaviour:
   m_modifierType: 0
   m_statModifiers:
     MaxHealth: 0
-    MaxSpeed: 3
+    MaxSpeed: 2
     RangedDelay: 0
     RangedDamage: 0
     RangedRange: 0

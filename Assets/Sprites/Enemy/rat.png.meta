@@ -6,6 +6,8 @@ TextureImporter:
     21300002: rat_1
     21300004: rat_2
     21300006: rat_3
+    21300008: rat_4
+    21300010: rat_5
   externalObjects: {}
   serializedVersion: 7
   mipmaps:
@@ -92,7 +94,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 0
+        y: 32
         width: 32
         height: 32
       alignment: 0
@@ -102,7 +104,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1e7b6a55095867c448824e0064a522dd
+      spriteID: ddc36a46ebd91724c9a6f814c625506f
       vertices: []
       indices: 
       edges: []
@@ -112,7 +114,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 32
-        y: 0
+        y: 32
         width: 32
         height: 32
       alignment: 0
@@ -122,7 +124,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: fee2b25b0729a164b92f990546aa0ccb
+      spriteID: d222ddf38f574b34c9e7923ffb7b949e
       vertices: []
       indices: 
       edges: []
@@ -132,7 +134,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 64
-        y: 0
+        y: 32
         width: 32
         height: 32
       alignment: 0
@@ -142,7 +144,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6b2bf9058bea4a44da11fea06cf3a126
+      spriteID: 3018929a5943ab8498de0e8e9078f8c5
       vertices: []
       indices: 
       edges: []
@@ -152,7 +154,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 96
-        y: 0
+        y: 32
         width: 32
         height: 32
       alignment: 0
@@ -162,7 +164,47 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: da28400933dd5c54aaa2b33885a8aaba
+      spriteID: 74e8f7105cc33ca4bb89fe7ba9360039
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rat_4
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 32
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 97545d64dc83c5243a33d1fa1982deff
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rat_5
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 32
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c4b353cb490952745b120d4549731036
       vertices: []
       indices: 
       edges: []

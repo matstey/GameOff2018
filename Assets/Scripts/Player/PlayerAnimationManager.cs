@@ -20,39 +20,42 @@ public class PlayerAnimationManager : MonoBehaviour {
     float m_maxWalkAnimSpeed = 0.5f;
 
     [SerializeField]
+    float m_idleAnimSpeed = 0.2f;
+
+    [SerializeField]
     Color m_hitColor = Color.red;
 
     SpriteRenderer[] m_renderers;
 
     public void AttackMelee()
     {
-        m_bodyAnimController.SetTrigger("Attack");
+        m_bodyAnimController.SetTrigger("MeleeAttack");
     }
 
     public void AttackRanged()
     {
-        m_bodyAnimController.SetTrigger("Attack");
+        m_bodyAnimController.SetTrigger("RangedAttack");
     }
 
     public void Move(Vector2 move)
     {
         float animSpeed = move.magnitude * m_maxWalkAnimSpeed;
+        bool running = animSpeed > 0.01;
+
+        m_bodyAnimController.SetBool("Running", running);
+        m_headAnimController.SetBool("Running", running);
+        m_legsAnimController.SetBool("Running", running);
+
+        if (!running)
+        {
+            animSpeed = m_idleAnimSpeed;
+        }
 
         m_legsAnimController.speed = animSpeed;
         m_headAnimController.speed = animSpeed;
-
         m_bodyAnimController.speed = Attacking ? 1.0f : animSpeed;
 
-        if (animSpeed <= 0.01)
-        {
-            m_headAnimController.Play("Run", -1, 0.0f);
-            m_legsAnimController.Play("Run", -1, 0.0f);
 
-            if (!Attacking)
-            {
-                m_bodyAnimController.Play("Run", -1, 0.0f);
-            }
-        }
 
         if (move.x != 0)
         {
@@ -62,7 +65,7 @@ public class PlayerAnimationManager : MonoBehaviour {
 
     public void Hit(float invincibilityTime)
     {
-        StartCoroutine(Flash(invincibilityTime));
+        StartCoroutine(Flash(invincibilityTime, m_hitColor));
     }
 
     public void ReplaceController(RuntimeAnimatorController controller, PlayerModifier.ModifierType type)
@@ -95,13 +98,19 @@ public class PlayerAnimationManager : MonoBehaviour {
         }
     }
 
-    IEnumerator Flash(float duration)
+    public void SetChargeAmount(float amount)
+    {
+        SetSpriteColor(Color.Lerp(Color.white, Color.red, amount));
+    }
+
+
+    IEnumerator Flash(float duration, Color color)
     {
         float m_startTime = Time.time;
 
         while (Time.time - m_startTime < duration)
         {
-            SetSpriteColor(m_hitColor);
+            SetSpriteColor(color);
             yield return new WaitForSeconds(0.1f);
             SetSpriteColor(Color.white);
             yield return new WaitForSeconds(0.2f);

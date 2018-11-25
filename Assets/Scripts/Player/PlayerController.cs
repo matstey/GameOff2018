@@ -46,6 +46,9 @@ public class PlayerController : MonoBehaviour, IHasAttack, IAttackable
 
     float m_invincibilityTime = 0.5f;
     float m_hitTime = 0;
+    bool m_dir = false;
+
+    MeleeModifier m_meleeModifier = null;
 
     public bool IsAlive { get { return m_health > 0.0f; } }
 
@@ -68,11 +71,16 @@ public class PlayerController : MonoBehaviour, IHasAttack, IAttackable
         {
             float currentTime = Time.time;
 
-            if (melee)
+            if (m_meleeModifier != null)
+            {
+                m_meleeModifier.Update(melee, m_dir);
+            }
+            else if (melee)
             {
                 Attack();
             }
-            else if (ranged && currentTime > m_lastFireTime + m_playerStats.RangedDelay)
+
+            if (ranged && currentTime > m_lastFireTime + m_playerStats.RangedDelay)
             {
                 m_lastFireTime = currentTime;
 
@@ -105,6 +113,11 @@ public class PlayerController : MonoBehaviour, IHasAttack, IAttackable
             move.Normalize();
         }
 
+        if (move.x != 0)
+        {
+            m_dir = move.x < 0;
+        }
+
         m_animationManager.Move(move);
 
         Vector2 newVelocity = move * m_playerStats.MaxSpeed;
@@ -113,6 +126,8 @@ public class PlayerController : MonoBehaviour, IHasAttack, IAttackable
         m_rigidbody.velocity = newVelocity;
 
         m_knockback = Vector2.SmoothDamp(m_knockback, Vector2.zero, ref m_knockbackVelocity, 0.2f);
+
+        m_meleeModifier?.UpdateMovement();
     }
 
     void Attack()
@@ -154,7 +169,7 @@ public class PlayerController : MonoBehaviour, IHasAttack, IAttackable
 
     public void OnHit(int damage, Vector2 direction)
     {
-        if(m_hitTime == 0 || Time.time - m_hitTime > m_invincibilityTime)
+        if((m_hitTime == 0 || Time.time - m_hitTime > m_invincibilityTime) && (m_meleeModifier != null &&! m_meleeModifier.ContactDamage))
         {
             m_hitTime = Time.time;
 
@@ -165,10 +180,25 @@ public class PlayerController : MonoBehaviour, IHasAttack, IAttackable
         }
     }
 
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        IAttackable hitObj = collision.gameObject.GetComponent<IAttackable>();
+        if (hitObj != null)
+        {
+            Vector2 dir = (transform.position - collision.gameObject.transform.position).normalized;
+            hitObj.OnHit(m_playerStats.MeleeDamage, dir);
+        }
+    }
+
     public void AddModifier(PlayerModifier modifier)
     {
         if (modifier != null)
         {
+            if (modifier.Type == PlayerModifier.ModifierType.Head)
+            {
+                m_meleeModifier = new ChargeMeleeModifier(m_rigidbody, m_animationManager);
+            }
+
             if (modifier.StatModifiers != null)
             {
                 PlayerStats statModifier = modifier.StatModifiers;

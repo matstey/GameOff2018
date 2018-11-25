@@ -44,6 +44,9 @@ public class EnemyController : MonoBehaviour, IHasAttack, IAttackable
     Vector2 m_currentWaypoint;
     bool m_wayPointValid = false;
 
+    bool m_dead = false;
+    Vector2 m_deadVelocity = new Vector2(); 
+
     // Use this for initialization
     void Awake()
     {
@@ -53,6 +56,13 @@ public class EnemyController : MonoBehaviour, IHasAttack, IAttackable
 
     void FixedUpdate()
     {
+        //Temporary, replace somewhere better
+        if (m_dead)
+        {
+            m_rigidbody.velocity = Vector2.SmoothDamp(m_rigidbody.velocity, Vector2.zero, ref m_deadVelocity, 0.5f);
+            return;
+        }
+
         AIResult result = null;
         switch(m_aiState)
         {
@@ -231,11 +241,14 @@ public class EnemyController : MonoBehaviour, IHasAttack, IAttackable
 
     void OnTriggerExit2D(Collider2D other)
     {
-        // Only clear the target if we have left our current target
-        if (m_target == other.gameObject)
+        if(!m_dead)
         {
-            m_target = null;
-            Stop();
+            // Only clear the target if we have left our current target
+            if (m_target == other.gameObject)
+            {
+                m_target = null;
+                Stop();
+            }
         }
     }
 
@@ -260,10 +273,16 @@ public class EnemyController : MonoBehaviour, IHasAttack, IAttackable
 
     public void OnHit(int damage, Vector2 dir)
     {
-        m_animationManager.Hit();
+        if (!m_dead)
+        {
+            //If not dead
+            //m_animationManager.Hit();
 
-        // TODO: Add health
-        Died?.Invoke(this);
+            // TODO: Add health
+            Died?.Invoke(this);
+            m_dead = true;
+            m_animationManager.Dead();
+        }
     }
 
     void OnDrawGizmos()
