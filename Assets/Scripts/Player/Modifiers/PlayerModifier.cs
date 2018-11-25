@@ -21,9 +21,9 @@ public class PlayerModifier : ScriptableObject
     PlayerStats m_statModifiers;
 
     [SerializeField]
-    AnimatorController m_replacementAnimator;
+    RuntimeAnimatorController m_replacementAnimator;
 
     public ModifierType Type { get { return m_modifierType; } }
     public PlayerStats StatModifiers { get { return m_statModifiers; } }
-    public AnimatorController ReplacementAnimator { get { return m_replacementAnimator; } }
+    public RuntimeAnimatorController ReplacementAnimator { get { return m_replacementAnimator; } }
 } 

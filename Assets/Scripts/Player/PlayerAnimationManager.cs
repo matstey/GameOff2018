@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using UnityEditor.Animations;
 using UnityEngine;
 
 public class PlayerAnimationManager : MonoBehaviour {
@@ -66,7 +65,7 @@ public class PlayerAnimationManager : MonoBehaviour {
         StartCoroutine(Flash(invincibilityTime));
     }
 
-    public void ReplaceController(AnimatorController controller, PlayerModifier.ModifierType type)
+    public void ReplaceController(RuntimeAnimatorController controller, PlayerModifier.ModifierType type)
     {
         Animator anim = null;
         switch (type)
